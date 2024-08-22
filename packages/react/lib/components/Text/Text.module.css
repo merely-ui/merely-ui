@@ -1,0 +1,40 @@
+.light {
+	--text-color: black;
+}
+
+.dark {
+	--text-color: white;
+}
+
+.text {
+	all: unset;
+	color: var(--text-color);
+}
+
+.size_xs {
+	font-size: 12px;
+}
+
+.size_s {
+	font-size: 14px;
+}
+
+.size_m {
+	font-size: 16px;
+}
+
+.size_l {
+	font-size: 18px;
+}
+
+.size_xl {
+	font-size: 20px;
+}
+
+.size_2xl {
+	font-size: 24px;
+}
+
+.size_3xl {
+	font-size: 28px;
+}

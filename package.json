@@ -1,0 +1,59 @@
+{
+	"name": "merely-ui",
+	"private": "true",
+	"version": "1.0.0",
+	"type": "module",
+	"author": "Ivan Blinov <blinovdevelop@gmail.com>",
+	"scripts": {
+		"test": "vitest",
+		"build": "pnpm --filter=./packages/react build",
+		"watch": "pnpm --filter=./packages/* build --watch",
+		"dev:ui": "pnpm --filter=./packages/react dev",
+		"build:ui": "pnpm --filter=./packages/react build",
+		"preview:ui": "pnpm --filter=./packages/react preview",
+		"sandbox:react": "pnpm --filter=./sandbox/react dev",
+		"sandbox:react:build": "pnpm --filter=./sandbox/react build",
+		"sandbox:react:preview": "pnpm --filter=./sandbox/react preview",
+		"sandbox:next": "pnpm --filter=./sandbox/next dev",
+		"sandbox:next:build": "pnpm --filter=./sandbox/next build",
+		"sandbox:next:start": "pnpm --filter=./sandbox/next start"
+	},
+	"license": "MIT",
+	"pnpm": {
+		"overrides": {
+			"react": "^18.2.0",
+			"react-dom": "^18.2.0"
+		}
+	},
+	"engines": {
+		"node": ">=18.x"
+	},
+	"dependencies": {
+		"@eslint/compat": "^1.1.1",
+		"@eslint/eslintrc": "^3.1.0",
+		"@eslint/js": "^9.7.0",
+		"@testing-library/jest-dom": "^6.4.8",
+		"@testing-library/react": "^16.0.0",
+		"@types/node": "^20.12.7",
+		"@typescript-eslint/eslint-plugin": "^7.2.0",
+		"@typescript-eslint/parser": "^7.2.0",
+		"autoprefixer": "^10.4.18",
+		"eslint": "^9.7.0",
+		"eslint-config-prettier": "^9.1.0",
+		"eslint-plugin-prettier": "^5.1.3",
+		"eslint-plugin-react": "^7.34.4",
+		"eslint-plugin-react-hooks": "^4.6.0",
+		"globals": "^15.8.0",
+		"jsdom": "^24.1.1",
+		"prettier": "^3.1.1",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"ts-morph": "^23.0.0",
+		"tsup": "^8.0.1",
+		"tsx": "^4.7.3",
+		"typescript": "^5.4.5",
+		"typescript-eslint": "^7.16.0",
+		"vitest": "^2.0.5",
+		"vitest-axe": "^0.1.0"
+	}
+}

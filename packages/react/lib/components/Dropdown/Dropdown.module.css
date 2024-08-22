@@ -1,0 +1,42 @@
+.wrapper {
+	display: inline-block;
+	position: relative;
+	z-index: 11;
+}
+
+@keyframes appearBottom {
+	from {
+		opacity: 0;
+		transform: translateY(-5px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0px);
+	}
+}
+.bottom {
+	left: 0;
+	top: 100%;
+
+	@media (prefers-reduced-motion: no-preference) {
+		animation: appearBottom;
+	}
+}
+
+.unmount_bottom {
+	opacity: 0;
+	transform: translateY(-5px);
+}
+
+.content {
+	background-color: #f9f9f9;
+	color: black;
+	min-width: 125px;
+	border-radius: 0px 5px 5px 5px;
+	transition: 150ms;
+	animation-duration: 150ms;
+	position: absolute;
+	z-index: 10;
+	left: 0;
+	top: 100%;
+}

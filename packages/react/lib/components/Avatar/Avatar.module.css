@@ -1,0 +1,61 @@
+.avatar {
+	align-self: flex-start;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	aspect-ratio: 1;
+}
+
+.avatarBadge {
+	width: 12px;
+	aspect-ratio: 1;
+	border-radius: 999px;
+	position: absolute;
+	outline: 5px solid transparent;
+}
+
+.default {
+	background-color: #eee;
+	padding: 10px;
+	border-radius: 999px;
+}
+
+.online {
+	background-color: chartreuse;
+}
+.offline {
+	background-color: red;
+}
+.sleep {
+	background-color: orange;
+}
+
+.top-right {
+	right: 0px;
+	top: 0px;
+}
+.top-left {
+	left: 0px;
+	top: 0px;
+}
+.bottom-right {
+	right: 0px;
+	bottom: 0px;
+}
+.bottom-left {
+	left: 0px;
+	bottom: 0px;
+}
+
+.size_s {
+	padding: 5px;
+}
+
+.size_m {
+	padding: 10px;
+}
+
+.size_l {
+	padding: 15px;
+}
