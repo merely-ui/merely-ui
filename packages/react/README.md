@@ -64,7 +64,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 import { Button } from '@merely-ui/react'
 
 function App() {
-	return <Button>Click me!</Button>
+  return <Button>Click me!</Button>
 }
 ```
 
