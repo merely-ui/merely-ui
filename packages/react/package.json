@@ -1,8 +1,25 @@
 {
 	"name": "@merely-ui/react",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"license": "MIT",
 	"author": "Ivan Blinov <blinovdevelop@gmail.com>",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/merely-ui/merely-ui",
+		"directory": "packages/react"
+	},
+	"keywords": [
+		"react",
+		"ui",
+		"uikit",
+		"lightweight",
+		"react-components",
+		"components",
+		"accessible"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
 	"type": "module",
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
