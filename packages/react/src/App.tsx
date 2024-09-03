@@ -21,6 +21,7 @@ import {
 	Hint,
 	HintText,
 	HintTrigger,
+	Input,
 	Popover,
 	PopoverContent,
 	PopoverTrigger,
@@ -44,7 +45,9 @@ function App() {
 			<p className='read-the-docs'>
 				Click on the Vite and React logos to learn more
 			</p>
-			<Button onClick={toggleDis}>Open</Button>
+			<Button variant='outline' onClick={toggleDis}>
+				Open
+			</Button>
 			<Button
 				onClick={toggle}
 				ml={'100px'}
@@ -110,6 +113,7 @@ function App() {
 					</PopoverFooter>
 				</PopoverContent>
 			</Popover>
+			<Input placeholder='Some text' />
 		</div>
 	)
 }

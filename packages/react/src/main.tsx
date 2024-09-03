@@ -5,7 +5,7 @@ import App from './App'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<StrictMode>
-		<MerelyProvider>
+		<MerelyProvider CSSReset>
 			<App />
 		</MerelyProvider>
 	</StrictMode>
