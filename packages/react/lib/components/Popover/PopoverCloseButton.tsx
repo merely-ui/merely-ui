@@ -23,9 +23,7 @@ export const PopoverCloseButton: FC<PopoverCloseButtonProps> = ({
 	const { theme: cssTheme } = useColorTheme(theme)
 	const fill = cssTheme === 'dark' ? 'white' : 'black'
 
-	const onClick = () => {
-		setIsOpen(false)
-	}
+	const onClick = () => setIsOpen(false)
 
 	return (
 		<Button

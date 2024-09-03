@@ -1,4 +1,4 @@
-import { createContext, Dispatch, SetStateAction } from 'react'
+import { createContext, Dispatch, SetStateAction, useContext } from 'react'
 import { DropdownDirection } from './Dropdown'
 
 type DropdownContextType = {
@@ -14,3 +14,5 @@ export const DropdownContext = createContext<DropdownContextType>({
 	direction: 'bottom',
 	isUnmounting: false
 })
+
+export const useDropdownContext = () => useContext(DropdownContext)

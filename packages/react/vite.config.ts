@@ -1,4 +1,3 @@
-/// <reference types="vitest" />
 import react from '@vitejs/plugin-react'
 import { glob } from 'glob'
 import { extname, relative, resolve } from 'path'

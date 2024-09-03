@@ -15,9 +15,6 @@
 	--text-color: #000;
 }
 
-.trigger {
-}
-
 @keyframes appearRight {
 	from {
 		opacity: 0;
@@ -129,6 +126,9 @@
 	border-radius: 10px;
 	color: var(--text-color);
 	background-color: var(--bg-color);
-	transition-duration: 150ms;
-	animation-duration: 150ms;
+
+	@media (prefers-reduced-motion: no-preference) {
+		transition-duration: 150ms;
+		animation-duration: 150ms;
+	}
 }

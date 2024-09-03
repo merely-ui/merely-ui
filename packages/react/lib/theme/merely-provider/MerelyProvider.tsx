@@ -4,6 +4,8 @@ import { injectGlobal } from '@emotion/css'
 import { FC, PropsWithChildren } from 'react'
 import { ColorThemeProvider } from '../color-theme-provider'
 import { MerelyGlobalContext, MerelyThemeConfig } from './merely-global-context'
+import { merelyGlobalStyles } from './merely-global-styles'
+import { resetStyles } from './reset-styles'
 
 export interface MerelyProviderProps {
 	/** @param {boolean} disableGlobalStyles  If `true`, Merely Global Styles will be disabled :) */
@@ -20,30 +22,8 @@ export const MerelyProvider: FC<PropsWithChildren<MerelyProviderProps>> = ({
 	CSSReset,
 	themeConfig = {}
 }) => {
-	if (!disableGlobalStyles) {
-		injectGlobal`
-		@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-		:root {
-			font-family: "Inter", sans-serif;
-			font-optical-sizing: auto;
-			fontWeight: 400;
-			font-style: normal;
-  		font-variation-settings:
-    	"slnt" 0;
-		}
-		html.dark { 
-		background-color: black;
-		}
-		html.light {
-		background-color: #fff;
-		}
-		@media (prefers-reduced-motion: no-preference) {
-			html {
-			transition: background-color 150ms ease;
-			}
-		}
-		`
-	}
+	if (!disableGlobalStyles) injectGlobal(merelyGlobalStyles)
+	if (CSSReset) injectGlobal(resetStyles)
 
 	return (
 		<MerelyGlobalContext.Provider value={themeConfig}>

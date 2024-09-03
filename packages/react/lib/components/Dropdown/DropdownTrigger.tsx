@@ -3,8 +3,8 @@
 import { MerelyComponentProps, merely } from '@/style-system'
 import { useGlobalContext } from '@/theme'
 import { cx } from '@emotion/css'
-import { ElementType, ReactNode, useCallback, useContext } from 'react'
-import { DropdownContext } from './dropdown-context'
+import { ElementType, ReactNode } from 'react'
+import { useDropdownContext } from './dropdown-context'
 import cls from './Dropdown.module.css'
 
 /** @param C component tag, defaults to 'div' */
@@ -18,15 +18,13 @@ export const DropdownTrigger = <C extends ElementType = 'div'>({
 	...otherProps
 }: DropdownTriggerProps<C>) => {
 	const { dropdownTrigger } = useGlobalContext()
-	const { setIsOpen, isOpen } = useContext(DropdownContext)
+	const { setIsOpen, isOpen } = useDropdownContext()
 
-	const handleClick = useCallback(() => {
-		setIsOpen(prev => !prev)
-	}, [setIsOpen])
+	const onClick = () => setIsOpen(prev => !prev)
 
 	return (
 		<merely.div
-			onClick={handleClick}
+			onClick={onClick}
 			className={cx(cls.trigger, className)}
 			overlapCSS={dropdownTrigger}
 			role='button'

@@ -1,21 +1,19 @@
 'use client'
 
 import { merely, MerelyComponentProps } from '@/style-system'
-import { ElementType, PropsWithChildren, useCallback, useContext } from 'react'
-import { PopoverContext } from './popover-context'
+import { ElementType, PropsWithChildren } from 'react'
+import { usePopoverContext } from './popover-context'
 
 export const PopoverTrigger = <C extends ElementType = 'div'>({
 	children,
 	...otherProps
 }: PropsWithChildren<MerelyComponentProps<C>>) => {
-	const { setIsOpen } = useContext(PopoverContext)
+	const { setIsOpen } = usePopoverContext()
 
-	const handleClick = useCallback(() => {
-		setIsOpen(prev => !prev)
-	}, [setIsOpen])
+	const onClick = () => setIsOpen(prev => !prev)
 
 	return (
-		<merely.div onClick={handleClick} aria-haspopup {...otherProps}>
+		<merely.div onClick={onClick} aria-haspopup {...otherProps}>
 			{children}
 		</merely.div>
 	)

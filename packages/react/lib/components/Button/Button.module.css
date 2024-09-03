@@ -1,21 +1,24 @@
 :root {
 	--focus-border-color: #0060df;
+	--outline-hover-color: #898989;
 }
 
 .dark {
 	--bg-color: white;
 	--text-color: black;
 	--hover-bg: #e3e3e3;
+	--border-color: white;
 	--inverted-hover-bg: #1a1a1a;
-	--border-color: black;
+	--inverted-text-color: white;
 }
 
 .light {
 	--bg-color: #121212;
 	--text-color: white;
 	--hover-bg: #2c2c2c;
-	--border-color: white;
+	--border-color: black;
 	--inverted-hover-bg: #e3e3e3;
+	--inverted-text-color: black;
 }
 
 .button {
@@ -38,7 +41,7 @@
 	@media (prefers-reduced-motion: no-preference) {
 		transition-timing-function: ease;
 		transition-duration: 150ms;
-		transition-property: background-color, color, outline-color;
+		transition-property: background-color, color, outline-color, border-color;
 	}
 }
 
@@ -54,19 +57,12 @@
 .outline {
 	background-color: transparent;
 	border: 1px solid var(--border-color);
+	color: var(--inverted-text-color);
 
 	&:hover {
 		background-color: transparent;
-		border-color: #3e3e3e;
-		color: #3e3e3e;
-	}
-
-	@media (prefers-color-scheme: dark) {
-		&:hover {
-			background-color: transparent;
-			border-color: #3e3e3e;
-			color: #3e3e3e;
-		}
+		border-color: var(--outline-hover-color);
+		color: var(--outline-hover-color);
 	}
 }
 

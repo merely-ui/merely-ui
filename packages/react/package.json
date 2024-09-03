@@ -1,6 +1,6 @@
 {
 	"name": "@merely-ui/react",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"license": "MIT",
 	"author": "Ivan Blinov <blinovdevelop@gmail.com>",
 	"repository": {
@@ -38,7 +38,7 @@
 	"scripts": {
 		"dev": "vite",
 		"test": "vitest",
-		"build": "rm -rf ./dist && tsup lib && vite build",
+		"build": "rm -rf ./dist && tsup lib && vite build && node ./build/insert-use-client.js",
 		"lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
 		"preview": "vite preview",
 		"prepublishOnly": "npm run build"

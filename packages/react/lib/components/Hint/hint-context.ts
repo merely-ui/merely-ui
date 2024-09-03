@@ -1,4 +1,4 @@
-import { createContext, Dispatch, SetStateAction } from 'react'
+import { createContext, Dispatch, SetStateAction, useContext } from 'react'
 import { HintDirection } from './Hint'
 
 type HintContextType = {
@@ -14,3 +14,5 @@ export const HintContext = createContext<HintContextType>({
 	direction: 'left',
 	isUnmounting: false
 })
+
+export const useHintContext = () => useContext(HintContext)

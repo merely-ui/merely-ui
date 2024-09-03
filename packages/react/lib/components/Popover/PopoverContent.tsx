@@ -2,9 +2,9 @@
 
 import { cx, getChild, merely, MerelyComponentProps } from '@/style-system'
 import { useColorTheme } from '@/theme'
-import { ElementType, PropsWithChildren, useContext } from 'react'
+import { ElementType, PropsWithChildren } from 'react'
 import styles from './Popover.module.css'
-import { PopoverContext } from './popover-context'
+import { usePopoverContext } from './popover-context'
 
 export const PopoverContent = <C extends ElementType = 'div'>({
 	children,
@@ -13,7 +13,7 @@ export const PopoverContent = <C extends ElementType = 'div'>({
 	...otherProps
 }: PropsWithChildren<MerelyComponentProps<C>>) => {
 	const { theme: cssTheme } = useColorTheme(theme)
-	const { direction, isUnmounting } = useContext(PopoverContext)
+	const { direction, isUnmounting } = usePopoverContext()
 
 	const closeButton = getChild(children, '@merely-ui/popover-close-button')
 	const header = getChild(children, '@merely-ui/popover-header')

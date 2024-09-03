@@ -20,21 +20,17 @@
 	outline: 1px solid var(--border-color);
 	border-radius: 5px;
 	background-color: var(--bg-color);
-	transition-property: outline-color, outline-width;
-	transition: all 0.1s ease-in-out;
-
-	&:is(:hover, :focus) {
-		outline-color: var(--inverted-hover-bg);
-	}
 
 	&:focus {
+		outline-color: var(--inverted-hover-bg);
 		outline-width: 2px;
 	}
 
 	&::placeholder {
-		font-size: 16px;
+		font-size: inherit;
 		color: #484848;
 	}
+
 	&[type='file'] {
 		&::file-selector-button {
 			all: unset;
@@ -44,12 +40,17 @@
 			border-radius: 5px;
 			margin-right: 8px;
 			font-weight: 400;
+
+			&:hover {
+				background-color: #e3e3e3;
+			}
 		}
 	}
-	&[type='file'] {
-		&::file-selector-button:hover {
-			background-color: #e3e3e3;
-		}
+
+	@media (prefers-reduced-motion: no-preference) {
+		transition-timing-function: ease-in-out;
+		transition-duration: 100ms;
+		transition-property: outline-color, outline-width, background-color;
 	}
 }
 
