@@ -16,6 +16,8 @@ import {
 	ReactNode,
 	SetStateAction,
 	useEffect,
+	useId,
+	useMemo,
 	useRef,
 	useState
 } from 'react'
@@ -35,6 +37,7 @@ export interface SelectProps
 	icon?: ReactNode
 	value?: string
 	onChange?: Dispatch<SetStateAction<any>>
+	placeholder?: ReactNode
 }
 
 export const Select: FC<PropsWithChildren<SelectProps>> = ({
@@ -45,6 +48,7 @@ export const Select: FC<PropsWithChildren<SelectProps>> = ({
 	theme,
 	icon,
 	onChange,
+	placeholder,
 	value: externalValue = '',
 	...otherProps
 }) => {
@@ -53,6 +57,14 @@ export const Select: FC<PropsWithChildren<SelectProps>> = ({
 	const [value, setValue] = useState(externalValue)
 	const [displayValue, setDisplayValue] = useState('')
 	const [keyboardFocus, setKeyboardFocus] = useState(false)
+
+	const id = useId()
+
+	const visibleElement = useMemo(() => {
+		if (displayValue) return displayValue
+		if (placeholder) return placeholder
+		return 'Select'
+	}, [displayValue, placeholder])
 
 	const {
 		isOpen: isExpanded,
@@ -124,10 +136,10 @@ export const Select: FC<PropsWithChildren<SelectProps>> = ({
 					aria-label='Select button'
 					aria-haspopup='listbox'
 					aria-expanded={isExpanded}
-					aria-controls='select-dropdown-#52'
+					aria-controls={id}
 					aria-autocomplete='none'
 				>
-					<span>{displayValue ? displayValue : 'Select'}</span>
+					<span>{visibleElement}</span>
 					{icon ? icon : <SelectArrow />}
 				</button>
 				<ul
@@ -140,7 +152,7 @@ export const Select: FC<PropsWithChildren<SelectProps>> = ({
 					onKeyDown={onListKeyDown}
 					tabIndex={-1}
 					role='listbox'
-					id='select-dropdown-#52'
+					id={id}
 				>
 					{children}
 				</ul>

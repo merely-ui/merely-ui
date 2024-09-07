@@ -19,6 +19,7 @@
 .select {
 	display: inline-block;
 	position: relative;
+	min-width: 130px;
 }
 
 .button {
@@ -30,7 +31,8 @@
 	align-items: center;
 	justify-content: space-between;
 	gap: 1rem;
-	min-width: 110px;
+	box-sizing: border-box;
+	width: 100%;
 	border: 1px solid var(--border-color);
 	border-radius: 7px;
 	font-weight: 500;

@@ -83,7 +83,7 @@ function App() {
 					<AvatarBadge w={15} />
 				</Avatar>
 			</Flex>
-			<Select>
+			<Select placeholder='SELECT'>
 				<SelectItem>Mango</SelectItem>
 			</Select>
 			<Tag>Sale</Tag>
