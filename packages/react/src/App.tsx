@@ -84,8 +84,8 @@ function App() {
 					<AvatarBadge w={15} />
 				</Avatar>
 			</Flex>
-			<Select placeholder='SELECT'>
-				<SelectItem>Mango</SelectItem>
+			<Select onChange={value => console.log(value)} placeholder='SELECT'>
+				<SelectItem selected>Mango</SelectItem>
 			</Select>
 			<Tag>Sale</Tag>
 			<Modal isOpen={isOpen} onClose={onClose}>

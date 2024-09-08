@@ -15,6 +15,7 @@ import {
 	PropsWithChildren,
 	ReactNode,
 	SetStateAction,
+	useCallback,
 	useEffect,
 	useId,
 	useMemo,
@@ -104,11 +105,19 @@ export const Select: FC<PropsWithChildren<SelectProps>> = ({
 		}
 	}
 
+	const withOnChange = useCallback(
+		(value: string) => {
+			setValue(value)
+			onChange?.(value)
+		},
+		[onChange]
+	)
+
 	return (
 		<SelectContext.Provider
 			value={{
 				value,
-				setValue: onChange ?? setValue,
+				setValue: onChange ? withOnChange : setValue,
 				isExpanded,
 				setIsExpanded,
 				displayValue,
