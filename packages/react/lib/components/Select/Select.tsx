@@ -7,7 +7,7 @@ import {
 	MerelyComponentProps,
 	useDelayUnmount
 } from '@/style-system'
-import { useColorTheme } from '@/theme'
+import { useColorMode } from '@/theme'
 import {
 	Dispatch,
 	FC,
@@ -75,7 +75,7 @@ export const Select: FC<PropsWithChildren<SelectProps>> = ({
 		setKeyboardFocus(false)
 	})
 	const { shouldRender } = useDelayUnmount(isExpanded, 150)
-	const { theme: cssTheme } = useColorTheme(theme)
+	const { colorMode: cssTheme } = useColorMode(theme)
 
 	useEffect(() => {
 		if (isExpanded) {

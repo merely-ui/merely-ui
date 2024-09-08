@@ -1,7 +1,7 @@
 'use client'
 
 import { MerelyComponentProps, cx, merely } from '@/style-system'
-import { useColorTheme } from '@/theme'
+import { useColorMode } from '@/theme'
 import { ElementType, PropsWithChildren } from 'react'
 import styles from './Text.module.css'
 
@@ -18,7 +18,7 @@ export const Text = <C extends ElementType = 'p'>({
 	theme,
 	...otherProps
 }: PropsWithChildren<TextProps<C>>) => {
-	const { theme: cssTheme } = useColorTheme(theme)
+	const { colorMode: cssTheme } = useColorMode(theme)
 
 	return (
 		<merely.p

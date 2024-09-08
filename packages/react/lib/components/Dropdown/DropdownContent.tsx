@@ -2,7 +2,7 @@
 
 import { cx, merely } from '@/style-system'
 import { MerelyComponentProps } from '@/style-system/props-types'
-import { useColorTheme, useGlobalContext } from '@/theme'
+import { useColorMode, useGlobalContext } from '@/theme'
 import { ElementType, PropsWithChildren } from 'react'
 import styles from './Dropdown.module.css'
 import { useDropdownContext } from './dropdown-context'
@@ -18,7 +18,7 @@ export const DropdownContent = <C extends ElementType = 'div'>({
 	...otherProps
 }: DropdownContentProps<C>) => {
 	const { dropdownContent } = useGlobalContext()
-	const { theme: cssTheme } = useColorTheme(theme)
+	const { colorMode: cssTheme } = useColorMode(theme)
 	const { direction, isUnmounting } = useDropdownContext()
 
 	return (

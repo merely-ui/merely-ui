@@ -1,7 +1,7 @@
 'use client'
 
 import { cx, merely, MerelyComponentProps } from '@/style-system'
-import { useColorTheme } from '@/theme'
+import { useColorMode } from '@/theme'
 import { useGlobalContext } from '@/theme/merely-provider/merely-global-context'
 import { FC, PropsWithChildren } from 'react'
 import styles from './Button.module.css'
@@ -23,7 +23,7 @@ export const Button: FC<PropsWithChildren<ButtonProps>> = ({
 	...otherProps
 }) => {
 	const { button } = useGlobalContext()
-	const { theme: cssTheme } = useColorTheme(theme)
+	const { colorMode: cssTheme } = useColorMode(theme)
 
 	return (
 		<merely.button

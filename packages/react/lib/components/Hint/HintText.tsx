@@ -1,7 +1,7 @@
 'use client'
 
 import { cx, merely, MerelyComponentProps } from '@/style-system'
-import { useColorTheme } from '@/theme'
+import { useColorMode } from '@/theme'
 import { ElementType, PropsWithChildren } from 'react'
 import styles from './Hint.module.css'
 import { useHintContext } from './hint-context'
@@ -12,7 +12,7 @@ export const HintText = <C extends ElementType = 'div'>({
 	className,
 	...otherProps
 }: PropsWithChildren<MerelyComponentProps<C>>) => {
-	const { theme: cssTheme } = useColorTheme(theme)
+	const { colorMode: cssTheme } = useColorMode(theme)
 	const { direction, isUnmounting } = useHintContext()
 
 	return (

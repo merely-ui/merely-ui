@@ -31,13 +31,13 @@ import {
 	Tag,
 	Text,
 	Textarea,
-	useColorTheme,
+	useColorMode,
 	useDisclosure
 } from '../lib'
 import './App.css'
 
 function App() {
-	const { toggle } = useColorTheme()
+	const { toggle, setColorMode } = useColorMode()
 	const { isOpen, onClose, toggle: toggleDis } = useDisclosure()
 
 	return (
@@ -45,6 +45,7 @@ function App() {
 			<p className='read-the-docs'>
 				Click on the Vite and React logos to learn more
 			</p>
+			<Button onClick={() => setColorMode('light')}>Set dark</Button>
 			<Button variant='outline' onClick={toggleDis}>
 				Open
 			</Button>

@@ -1,7 +1,7 @@
 'use client'
 
 import { cx, merely, MerelyComponentProps } from '@/style-system'
-import { useColorTheme, useGlobalContext } from '@/theme'
+import { useColorMode, useGlobalContext } from '@/theme'
 import { FC } from 'react'
 import styles from './Input.module.css'
 
@@ -21,7 +21,7 @@ export const Input: FC<InputProps> = ({
 	...otherProps
 }) => {
 	const { input } = useGlobalContext()
-	const { theme: cssTheme } = useColorTheme(theme)
+	const { colorMode: cssTheme } = useColorMode(theme)
 
 	return (
 		<merely.input

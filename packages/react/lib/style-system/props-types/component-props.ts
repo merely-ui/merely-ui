@@ -1,4 +1,4 @@
-import { MerelyTheme } from '@/theme/color-theme-provider'
+import { MerelyColorMode } from '@/theme/color-mode-provider'
 import {
 	ComponentProps,
 	ComponentPropsWithoutRef,
@@ -10,7 +10,7 @@ import { MerelyStyleProps } from '.'
 type CompoundProps<K extends ElementType> = {
 	_ref?: Ref<ComponentProps<K>>
 	as?: ElementType
-	theme?: MerelyTheme
+	theme?: MerelyColorMode
 }
 
 export type MerelyComponentProps<K extends ElementType> = Omit<

@@ -1,4 +1,4 @@
-export { useColorTheme } from './color-theme-provider'
+export { useColorMode, type MerelyColorMode } from './color-mode-provider'
 
 export * from './color-palette/colors'
 export * from './merely-provider'

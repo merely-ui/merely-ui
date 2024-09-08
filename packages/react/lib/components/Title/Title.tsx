@@ -1,7 +1,7 @@
 'use client'
 
 import { cx, merely, MerelyComponentProps } from '@/style-system'
-import { useColorTheme } from '@/theme'
+import { useColorMode } from '@/theme'
 import { ElementType, PropsWithChildren } from 'react'
 import styles from './Title.module.css'
 export type TitleSize = 'xs' | 's' | 'm' | 'l' | 'xl' | '2xl' | '3xl'
@@ -18,7 +18,7 @@ export const Title = <C extends ElementType = 'h3'>({
 	theme,
 	...otherProps
 }: PropsWithChildren<TitleProps<C>>) => {
-	const { theme: cssTheme } = useColorTheme(theme)
+	const { colorMode: cssTheme } = useColorMode(theme)
 
 	return (
 		<merely.h3

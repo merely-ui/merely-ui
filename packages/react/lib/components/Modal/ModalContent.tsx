@@ -1,7 +1,7 @@
 'use client'
 
 import { cx, getChild, merely, MerelyComponentProps } from '@/style-system'
-import { useColorTheme } from '@/theme'
+import { useColorMode } from '@/theme'
 import { ElementType, PropsWithChildren } from 'react'
 import styles from './Modal.module.css'
 import { useModalContext } from './modal-context'
@@ -12,7 +12,7 @@ export const ModalContent = <C extends ElementType = 'div'>({
 	className,
 	...otherProps
 }: PropsWithChildren<MerelyComponentProps<C>>) => {
-	const { theme: cssTheme } = useColorTheme(theme)
+	const { colorMode: cssTheme } = useColorMode(theme)
 	const { isUnmounting } = useModalContext()
 
 	const closeButton = getChild(children, '@merely-ui/modal-close-button')

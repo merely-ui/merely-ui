@@ -1,7 +1,7 @@
 'use client'
 
 import { cx, merely, MerelyComponentProps } from '@/style-system'
-import { useColorTheme, useGlobalContext } from '@/theme'
+import { useColorMode, useGlobalContext } from '@/theme'
 import { ElementType, PropsWithChildren } from 'react'
 import styles from './Tag.module.css'
 
@@ -22,7 +22,7 @@ export const Tag = <C extends ElementType = 'span'>({
 	...otherProps
 }: TagProps<C>) => {
 	const { tag } = useGlobalContext()
-	const { theme: cssTheme } = useColorTheme(theme)
+	const { colorMode: cssTheme } = useColorMode(theme)
 
 	return (
 		<merely.span

@@ -1,5 +1,5 @@
 import { MerelyComponentProps, cx } from '@/style-system'
-import { Cross, useColorTheme } from '@/theme'
+import { Cross, useColorMode } from '@/theme'
 import { FC, ReactNode } from 'react'
 import { Button } from '../Button'
 import { useModalContext } from './modal-context'
@@ -17,7 +17,7 @@ export const ModalCloseButton: FC<ModalCloseButtonProps> = ({
 	...otherProps
 }) => {
 	const { onClose } = useModalContext()
-	const { theme: cssTheme } = useColorTheme(theme)
+	const { colorMode: cssTheme } = useColorMode(theme)
 	const fill = cssTheme === 'dark' ? 'white' : 'black'
 
 	return (

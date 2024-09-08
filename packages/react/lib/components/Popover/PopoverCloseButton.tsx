@@ -1,7 +1,7 @@
 'use client'
 
 import { MerelyComponentProps, cx } from '@/style-system'
-import { Cross, useColorTheme } from '@/theme'
+import { Cross, useColorMode } from '@/theme'
 import { FC, ReactNode } from 'react'
 import { Button } from '../Button'
 import styles from './Popover.module.css'
@@ -20,7 +20,7 @@ export const PopoverCloseButton: FC<PopoverCloseButtonProps> = ({
 	...otherProps
 }) => {
 	const { setIsOpen } = usePopoverContext()
-	const { theme: cssTheme } = useColorTheme(theme)
+	const { colorMode: cssTheme } = useColorMode(theme)
 	const fill = cssTheme === 'dark' ? 'white' : 'black'
 
 	const onClick = () => setIsOpen(false)

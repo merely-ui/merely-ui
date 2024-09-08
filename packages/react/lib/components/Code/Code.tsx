@@ -1,7 +1,7 @@
 'use client'
 
 import { cx, merely, MerelyComponentProps } from '@/style-system'
-import { useColorTheme, useGlobalContext } from '@/theme'
+import { useColorMode, useGlobalContext } from '@/theme'
 import { FC, PropsWithChildren } from 'react'
 import styles from './Code.module.css'
 
@@ -19,7 +19,7 @@ export const Code: FC<PropsWithChildren<CodeProps>> = ({
 	...otherProps
 }) => {
 	const { code } = useGlobalContext()
-	const { theme: cssTheme } = useColorTheme(theme)
+	const { colorMode: cssTheme } = useColorMode(theme)
 
 	return (
 		<merely.pre

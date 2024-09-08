@@ -6,7 +6,7 @@ import {
 	MerelyComponentProps,
 	useDelayUnmount
 } from '@/style-system'
-import { useColorTheme, useGlobalContext } from '@/theme'
+import { useColorMode, useGlobalContext } from '@/theme'
 import { FC, PropsWithChildren, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import styles from './Modal.module.css'
@@ -34,7 +34,7 @@ export const Modal: FC<PropsWithChildren<ModalProps>> = ({
 	...otherProps
 }) => {
 	const { modal } = useGlobalContext()
-	const { theme: cssTheme } = useColorTheme(theme)
+	const { colorMode: cssTheme } = useColorMode(theme)
 	const { isUnmounting, shouldRender } = useDelayUnmount(isOpen, 140)
 
 	useEffect(() => {
