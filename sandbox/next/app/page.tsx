@@ -1,10 +1,18 @@
 import { Button, colors } from '@merely-ui/react'
-import styles from './page.module.css'
 
 export default function Home() {
 	return (
-		<main className={styles.main}>
+		<main>
 			<Button bgColor={colors.teal.$100}>Click</Button>
+			<Button mt={100} bgColor={colors.teal.$100}>
+				Click
+			</Button>
+			<Button mt={100} bgColor={colors.teal.$100}>
+				Click
+			</Button>
+			<Button mt={100} bgColor={colors.teal.$100}>
+				Click
+			</Button>
 		</main>
 	)
 }
