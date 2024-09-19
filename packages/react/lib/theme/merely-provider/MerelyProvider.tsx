@@ -4,7 +4,7 @@ import { injectGlobal } from '@emotion/css'
 import { FC, PropsWithChildren } from 'react'
 import { ColorModeProvider, MerelyColorMode } from '../color-mode-provider'
 import { MerelyGlobalContext, MerelyThemeConfig } from './merely-global-context'
-import { merelyGlobalStyles } from './merely-global-styles'
+import { InterFontUrl, merelyGlobalStyles } from './merely-global-styles'
 import { resetStyles } from './reset-styles'
 
 export interface MerelyProviderProps {
@@ -18,6 +18,8 @@ export interface MerelyProviderProps {
 	defaultColorMode?: MerelyColorMode
 	/** @param {boolean} enableSystemColorMode If `true`, Color Mode will be determined from `prefers-color-scheme` media query */
 	enableSystemColorMode?: boolean
+	/** @param {boolean} disableUrlFontImport If `true`, `Inter` font will not be loaded from Google Fonts via `@import` at CSS */
+	disableUrlFontImport?: boolean
 }
 
 export const MerelyProvider: FC<PropsWithChildren<MerelyProviderProps>> = ({
@@ -26,8 +28,10 @@ export const MerelyProvider: FC<PropsWithChildren<MerelyProviderProps>> = ({
 	CSSReset,
 	defaultColorMode = 'dark',
 	enableSystemColorMode = false,
+	disableUrlFontImport,
 	themeConfig = {}
 }) => {
+	if (!disableUrlFontImport) injectGlobal(InterFontUrl)
 	if (!disableGlobalStyles) injectGlobal(merelyGlobalStyles)
 	if (CSSReset) injectGlobal(resetStyles)
 
