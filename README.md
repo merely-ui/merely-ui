@@ -3,7 +3,7 @@
 
 <p align="center">
   <img alt="Bundle Size" src="https://badgen.net/bundlephobia/minzip/@merely-ui/react"/>
-  <a href="https://github.com/merely-ui/merely-ui/blob/main/LICENSE">
+  <a href="https://github.com/merely-ui/merely-ui">
     <img alt="MIT License" src="https://badgen.net/github/license/merely-ui/merely-ui"/>
   </a>
 </p>
