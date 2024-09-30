@@ -1,7 +1,7 @@
 'use client'
 
 import { injectGlobal } from '@emotion/css'
-import { FC, PropsWithChildren } from 'react'
+import { FC, PropsWithChildren, useLayoutEffect, useState } from 'react'
 import { ColorModeProvider, MerelyColorMode } from '../color-mode-provider'
 import { MerelyGlobalContext, MerelyThemeConfig } from './merely-global-context'
 import { InterFontUrl, merelyGlobalStyles } from './merely-global-styles'
@@ -34,6 +34,21 @@ export const MerelyProvider: FC<PropsWithChildren<MerelyProviderProps>> = ({
 	if (!disableUrlFontImport) injectGlobal(InterFontUrl)
 	if (!disableGlobalStyles) injectGlobal(merelyGlobalStyles)
 	if (CSSReset) injectGlobal(resetStyles)
+
+	const [stylesReady, setStylesReady] = useState(false)
+
+	useLayoutEffect(() => {
+		const loadStyles = async () => {
+			await new Promise(resolve => setTimeout(resolve, 500))
+			setStylesReady(true)
+		}
+
+		loadStyles()
+	}, [])
+
+	if (!stylesReady) {
+		return null
+	}
 
 	return (
 		<MerelyGlobalContext.Provider value={themeConfig}>
