@@ -6,7 +6,7 @@ import { useGlobalContext } from '@/theme'
 import { ElementType } from 'react'
 import styles from './Flex.module.css'
 
-export const Flex = <C extends ElementType = 'div'>({
+const Flex = <C extends ElementType = 'div'>({
 	children,
 	className,
 	...otherProps
@@ -23,3 +23,5 @@ export const Flex = <C extends ElementType = 'div'>({
 		</merely.div>
 	)
 }
+
+export { Flex, Flex as Stack }
