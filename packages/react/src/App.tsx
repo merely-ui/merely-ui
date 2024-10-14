@@ -84,7 +84,16 @@ function App() {
 					<AvatarBadge w={15} />
 				</Avatar>
 			</Flex>
-			<Select onChange={value => console.log(value)} placeholder='SELECT'>
+			<Select
+				onChange={value => console.log(value)}
+				placeholder='SELECT'
+				buttonProps={{
+					maxH: 30
+				}}
+				listProps={{
+					bgColor: 'white'
+				}}
+			>
 				<SelectItem selected>Mango</SelectItem>
 			</Select>
 			<Tag>Sale</Tag>

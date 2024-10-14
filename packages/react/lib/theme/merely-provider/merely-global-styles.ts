@@ -11,7 +11,7 @@ export const merelyGlobalStyles = `
 		background-color: black;
 		}
 		html.light {
-		background-color: #fff;
+		background-color: white;
 		}
 		@media (prefers-reduced-motion: no-preference) {
 			html {

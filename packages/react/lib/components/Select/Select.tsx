@@ -39,6 +39,8 @@ export interface SelectProps
 	value?: string
 	onChange?: Dispatch<SetStateAction<any>>
 	placeholder?: ReactNode
+	buttonProps?: MerelyComponentProps<'button'>
+	listProps?: MerelyComponentProps<'ul'>
 }
 
 export const Select: FC<PropsWithChildren<SelectProps>> = ({
@@ -51,10 +53,12 @@ export const Select: FC<PropsWithChildren<SelectProps>> = ({
 	onChange,
 	placeholder,
 	value: externalValue = '',
+	buttonProps,
+	listProps,
 	...otherProps
 }) => {
-	const ulRef = useRef<HTMLUListElement>(null)
-	const buttonRef = useRef<HTMLButtonElement>(null)
+	const ulRef = useRef(null)
+	const buttonRef = useRef(null)
 	const [value, setValue] = useState(externalValue)
 	const [displayValue, setDisplayValue] = useState('')
 	const [keyboardFocus, setKeyboardFocus] = useState(false)
@@ -136,8 +140,8 @@ export const Select: FC<PropsWithChildren<SelectProps>> = ({
 				)}
 				{...otherProps}
 			>
-				<button
-					ref={buttonRef}
+				<merely.button
+					_ref={buttonRef}
 					className={styles.button}
 					onClick={toggle}
 					onKeyDown={onButtonKeyDown}
@@ -147,12 +151,13 @@ export const Select: FC<PropsWithChildren<SelectProps>> = ({
 					aria-expanded={isExpanded}
 					aria-controls={id}
 					aria-autocomplete='none'
+					{...buttonProps}
 				>
 					<span>{visibleElement}</span>
 					{icon ? icon : <SelectArrow />}
-				</button>
-				<ul
-					ref={ulRef}
+				</merely.button>
+				<merely.ul
+					_ref={ulRef}
 					className={cx(styles.list, {
 						[styles.expanded]: isExpanded,
 						[styles.hidden]: !shouldRender,
@@ -162,9 +167,10 @@ export const Select: FC<PropsWithChildren<SelectProps>> = ({
 					tabIndex={-1}
 					role='listbox'
 					id={id}
+					{...listProps}
 				>
 					{children}
-				</ul>
+				</merely.ul>
 			</merely.div>
 		</SelectContext.Provider>
 	)
