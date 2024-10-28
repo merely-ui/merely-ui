@@ -60,7 +60,7 @@ function App() {
 			>
 				Enter
 			</Button>
-			<Flex>
+			<Flex className='home'>
 				<Text>Sdsdsd</Text>
 				<Code color='white'>console.log('Hello world!')</Code>
 				<label htmlFor='switch'>Label</label>

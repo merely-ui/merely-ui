@@ -19,7 +19,7 @@ const makeStyles = (
 	className?: string,
 	overlapCss?: CSSObject
 ) => {
-	return cx(css(overlapCss), css(styles), className)
+	return cx(className, css(overlapCss), css(styles))
 }
 
 const merelyImp = new Proxy(

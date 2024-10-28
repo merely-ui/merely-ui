@@ -5,3 +5,7 @@
 html {
 	background-color: #000;
 }
+
+.home {
+	display: none;
+}
