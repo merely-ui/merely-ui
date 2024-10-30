@@ -1,7 +1,7 @@
 'use client'
 
 import { injectGlobal } from '@emotion/css'
-import { FC, PropsWithChildren, useLayoutEffect, useState } from 'react'
+import { FC, PropsWithChildren, useEffect, useState } from 'react'
 import { ColorModeProvider, MerelyColorMode } from '../color-mode-provider'
 import { MerelyGlobalContext, MerelyThemeConfig } from './merely-global-context'
 import { InterFontUrl, merelyGlobalStyles } from './merely-global-styles'
@@ -37,7 +37,7 @@ export const MerelyProvider: FC<PropsWithChildren<MerelyProviderProps>> = ({
 
 	const [stylesReady, setStylesReady] = useState(false)
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		const loadStyles = async () => {
 			await new Promise(resolve => setTimeout(resolve, 500))
 			setStylesReady(true)
