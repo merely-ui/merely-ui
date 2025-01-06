@@ -1,21 +1,18 @@
-'use client'
-
 import { cx, merely } from '@/style-system'
-import { MerelyComponentProps } from '@/style-system/props-types'
+import { MerelyComponentProps } from '@/style-system/props'
 import { useGlobalContext } from '@/theme'
 import { ElementType } from 'react'
-import styles from './Flex.module.css'
+import { FlexRecipe } from './Flex.recipe'
 
-const Flex = <C extends ElementType = 'div'>({
-	children,
-	className,
-	...otherProps
-}: MerelyComponentProps<C>) => {
+const Flex = <C extends ElementType = 'div'>(
+	props: MerelyComponentProps<C>
+) => {
+	const { children, className, ...otherProps } = props
 	const { flex } = useGlobalContext()
 
 	return (
 		<merely.div
-			className={cx(styles.flex, className)}
+			className={cx(FlexRecipe, className)}
 			overlapCSS={flex}
 			{...otherProps}
 		>

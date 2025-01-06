@@ -1,28 +1,19 @@
-'use client'
-
 import { MerelyComponentProps, cx } from '@/style-system'
-import { Cross, useColorMode } from '@/theme'
-import { FC, ReactNode } from 'react'
+import { Cross } from '@/theme'
+import { ReactNode } from 'react'
 import { Button } from '../Button'
-import styles from './Popover.module.css'
 import { usePopoverContext } from './popover-context'
+import { PopoverRecipe } from './Popover.recipe'
 
 export interface PopoverCloseButtonProps
 	extends MerelyComponentProps<'button'> {
 	icon?: ReactNode
 }
 
-export const PopoverCloseButton: FC<PopoverCloseButtonProps> = ({
-	children,
-	className,
-	theme,
-	icon,
-	...otherProps
-}) => {
-	const { setIsOpen } = usePopoverContext()
-	const { colorMode: cssTheme } = useColorMode(theme)
-	const fill = cssTheme === 'dark' ? 'white' : 'black'
+export const PopoverCloseButton = (props: PopoverCloseButtonProps) => {
+	const { children, className, theme, icon, ...otherProps } = props
 
+	const { setIsOpen } = usePopoverContext()
 	const onClick = () => setIsOpen(false)
 
 	return (
@@ -30,10 +21,10 @@ export const PopoverCloseButton: FC<PopoverCloseButtonProps> = ({
 			variant='clear'
 			onClick={onClick}
 			tabIndex={0}
-			className={cx(styles.closeButton, styles[cssTheme], className)}
+			className={cx(PopoverRecipe.closeButton, className)}
 			{...otherProps}
 		>
-			{icon ? icon : <Cross fill={fill} />}
+			{icon ? icon : <Cross />}
 		</Button>
 	)
 }

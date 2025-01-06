@@ -1,11 +1,19 @@
-import { MerelyComponentProps, merely } from '@/style-system'
-import { FC } from 'react'
-import styles from './Modal.module.css'
+import { MerelyComponentProps, cx, merely } from '@/style-system'
 import { useModalContext } from './modal-context'
+import { ModalRecipe } from './Modal.recipe'
 
-export const ModalOverlay: FC<MerelyComponentProps<'div'>> = ({ ...props }) => {
+export const ModalOverlay = (props: MerelyComponentProps<'div'>) => {
+	const { className, ...otherProps } = props
+
 	const { onClose } = useModalContext()
-	return <merely.div onClick={onClose} className={styles.overlay} {...props} />
+
+	return (
+		<merely.div
+			onClick={onClose}
+			className={cx(ModalRecipe.overlay, className)}
+			{...otherProps}
+		/>
+	)
 }
 
 ModalOverlay.displayName = '@merely-ui/modal-overlay'

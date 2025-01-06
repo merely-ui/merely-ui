@@ -1,8 +1,6 @@
-'use client'
-
 import { cx, merely, MerelyComponentProps } from '@/style-system'
 import { ElementType, PropsWithChildren } from 'react'
-import styles from './Tag.module.css'
+import { TagRecipe } from './Tag.recipe'
 
 export const TagRightItem = <C extends ElementType = 'span'>({
 	children,
@@ -11,7 +9,7 @@ export const TagRightItem = <C extends ElementType = 'span'>({
 	...otherProps
 }: PropsWithChildren<MerelyComponentProps<C>>) => {
 	return (
-		<merely.span className={cx(styles.tagRight, className)} {...otherProps}>
+		<merely.span className={cx(TagRecipe.right, className)} {...otherProps}>
 			{children}
 		</merely.span>
 	)

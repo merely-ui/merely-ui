@@ -1,9 +1,6 @@
-'use client'
-
 import { cx, merely, MerelyComponentProps } from '@/style-system'
-import { useColorMode, useGlobalContext } from '@/theme'
-import { FC, PropsWithChildren } from 'react'
-import styles from './Textarea.module.css'
+import { useGlobalContext } from '@/theme'
+import { TextareaRecipe } from './Textarea.recipe'
 
 export type TextareaSize = 's' | 'm' | 'l'
 
@@ -11,24 +8,14 @@ export interface TextareaProps extends MerelyComponentProps<'textarea'> {
 	_size?: TextareaSize
 }
 
-export const Textarea: FC<PropsWithChildren<TextareaProps>> = ({
-	children,
-	_size = 'm',
-	className,
-	theme,
-	...otherProps
-}) => {
+export const Textarea = (props: TextareaProps) => {
+	const { children, _size = 'm', className, theme, ...otherProps } = props
+
 	const { textarea } = useGlobalContext()
-	const { colorMode: cssTheme } = useColorMode(theme)
 
 	return (
 		<merely.textarea
-			className={cx(
-				styles.textarea,
-				styles['size_' + _size],
-				styles[cssTheme],
-				className
-			)}
+			className={cx(TextareaRecipe.base, className)}
 			overlapCSS={textarea}
 			{...otherProps}
 		>

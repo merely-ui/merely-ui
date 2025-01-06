@@ -1,14 +1,14 @@
 import { cx, merely, MerelyComponentProps } from '@/style-system'
 import { ElementType } from 'react'
-import styles from './Modal.module.css'
+import { ModalRecipe } from './Modal.recipe'
 
-export const ModalFooter = <C extends ElementType = 'div'>({
-	children,
-	className,
-	...otherProps
-}: MerelyComponentProps<C>) => {
+export const ModalFooter = <C extends ElementType = 'div'>(
+	props: MerelyComponentProps<C>
+) => {
+	const { children, className, ...otherProps } = props
+
 	return (
-		<merely.div className={cx(styles.footer, className)} {...otherProps}>
+		<merely.div className={cx(ModalRecipe.footer, className)} {...otherProps}>
 			{children}
 		</merely.div>
 	)

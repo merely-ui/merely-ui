@@ -1,43 +1,31 @@
-'use client'
-
+import { useTheme } from 'next-themes'
 import { useCallback } from 'react'
-import { useColorModeContext } from './color-mode.context'
 import { MerelyColorMode } from './color-mode.types'
 
 /**
- * `useColorMode` is a custom hook which makes it possible to track the current color mode
- *  @param {MerelyColorMode} overrideMode Override current color theme
+ * `useColorMode` is a custom hook which makes it possible to track and switch the current color mode
  */
-export const useColorMode = (overrideMode?: MerelyColorMode) => {
-	const { setColorMode, colorMode } = useColorModeContext()
+export const useColorMode = () => {
+	const { resolvedTheme: colorMode, setTheme } = useTheme()
 
-	const toggle = useCallback(() => {
+	const toggle = () => {
 		if (colorMode === 'dark') {
-			setColorMode('light')
-			document.documentElement.classList.remove('dark')
-			document.documentElement.classList.add('light')
+			setTheme('light')
 		} else {
-			setColorMode('dark')
-			document.documentElement.classList.remove('light')
-			document.documentElement.classList.add('dark')
+			setTheme('dark')
 		}
-	}, [setColorMode, colorMode])
+	}
 
-	const setNewColorMode = useCallback(
+	const setColorMode = useCallback(
 		(newColorMode: MerelyColorMode) => {
-			if (newColorMode === 'dark')
-				document.documentElement.classList.remove('light')
-			else document.documentElement.classList.remove('dark')
-
-			setColorMode(newColorMode)
-			document.documentElement.classList.add(newColorMode)
+			setTheme(newColorMode)
 		},
-		[setColorMode]
+		[setTheme]
 	)
 
 	return {
-		colorMode: overrideMode ?? colorMode,
-		setColorMode: setNewColorMode,
+		colorMode,
+		setColorMode,
 		toggle
 	}
 }

@@ -1,5 +1,3 @@
-'use client'
-
 import { useOutsideDisclosure } from '@/hooks'
 import {
 	cx,
@@ -7,12 +5,10 @@ import {
 	MerelyComponentProps,
 	useDelayUnmount
 } from '@/style-system'
-import { useColorMode } from '@/theme'
+import { focusFirstChild, focusItself } from '@/utilities/focus'
 import {
 	Dispatch,
-	FC,
 	KeyboardEvent,
-	PropsWithChildren,
 	ReactNode,
 	SetStateAction,
 	useCallback,
@@ -22,41 +18,41 @@ import {
 	useRef,
 	useState
 } from 'react'
-import styles from './Select.module.css'
-import { SelectArrow } from './SelectArrow'
-import { focusFirstChild, focusItself } from './focus'
 import { getSelectedNode } from './get-selected-node'
 import { SelectContext } from './select-context'
+import { SelectRecipe } from './Select.recipe'
+import { SelectArrow } from './SelectArrow'
 
 export type SelectSize = 's' | 'm' | 'l'
 export type SelectVariant = 'default' | 'outline'
 
-export interface SelectProps
-	extends Omit<MerelyComponentProps<'div'>, 'onChange'> {
+export interface SelectProps extends MerelyComponentProps<'div'> {
 	_size?: SelectSize
 	variant?: SelectVariant
 	icon?: ReactNode
 	value?: string
-	onChange?: Dispatch<SetStateAction<any>>
+	onChangeValue?: Dispatch<SetStateAction<any>>
 	placeholder?: ReactNode
 	buttonProps?: MerelyComponentProps<'button'>
 	listProps?: MerelyComponentProps<'ul'>
 }
 
-export const Select: FC<PropsWithChildren<SelectProps>> = ({
-	children,
-	_size = 'm',
-	variant = 'default',
-	className,
-	theme,
-	icon,
-	onChange,
-	placeholder,
-	value: externalValue = '',
-	buttonProps,
-	listProps,
-	...otherProps
-}) => {
+export const Select = (props: SelectProps) => {
+	const {
+		children,
+		_size: size = 'm',
+		variant = 'default',
+		className,
+		theme,
+		icon,
+		onChangeValue,
+		placeholder,
+		value: externalValue = '',
+		buttonProps,
+		listProps,
+		...otherProps
+	} = props
+
 	const ulRef = useRef(null)
 	const buttonRef = useRef(null)
 	const [value, setValue] = useState(externalValue)
@@ -76,11 +72,13 @@ export const Select: FC<PropsWithChildren<SelectProps>> = ({
 		setIsOpen: setIsExpanded,
 		toggle,
 		ref
-	} = useOutsideDisclosure(() => {
-		setKeyboardFocus(false)
+	} = useOutsideDisclosure({
+		onCloseCallback: () => {
+			setKeyboardFocus(false)
+		}
 	})
+
 	const { shouldRender } = useDelayUnmount(isExpanded, 150)
-	const { colorMode: cssTheme } = useColorMode(theme)
 
 	useEffect(() => {
 		if (isExpanded) {
@@ -112,37 +110,32 @@ export const Select: FC<PropsWithChildren<SelectProps>> = ({
 	const withOnChange = useCallback(
 		(value: string) => {
 			setValue(value)
-			onChange?.(value)
+			onChangeValue?.(value)
 		},
-		[onChange]
+		[onChangeValue]
 	)
 
 	return (
 		<SelectContext.Provider
 			value={{
 				value,
-				setValue: onChange ? withOnChange : setValue,
+				setValue: onChangeValue ? withOnChange : setValue,
 				isExpanded,
 				setIsExpanded,
 				displayValue,
 				setDisplayValue,
-				keyboardFocus
+				keyboardFocus,
+				size
 			}}
 		>
 			<merely.div
 				_ref={ref}
-				className={cx(
-					styles.select,
-					styles['size_' + _size],
-					styles[variant],
-					styles[cssTheme],
-					className
-				)}
+				className={cx(SelectRecipe.base, className)}
 				{...otherProps}
 			>
 				<merely.button
 					_ref={buttonRef}
-					className={styles.button}
+					className={cx(SelectRecipe.button, SelectRecipe.sizes[size].button)}
 					onClick={toggle}
 					onKeyDown={onButtonKeyDown}
 					role='combobox'
@@ -158,10 +151,10 @@ export const Select: FC<PropsWithChildren<SelectProps>> = ({
 				</merely.button>
 				<merely.ul
 					_ref={ulRef}
-					className={cx(styles.list, {
-						[styles.expanded]: isExpanded,
-						[styles.hidden]: !shouldRender,
-						[styles.keyboardFocused]: keyboardFocus
+					className={cx(SelectRecipe.list, SelectRecipe.sizes[size].list, {
+						[SelectRecipe.expanded]: isExpanded,
+						[SelectRecipe.hidden]: !shouldRender,
+						[SelectRecipe.keyboardFocused]: keyboardFocus
 					})}
 					onKeyDown={onListKeyDown}
 					tabIndex={-1}

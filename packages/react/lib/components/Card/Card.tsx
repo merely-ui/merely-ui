@@ -1,9 +1,6 @@
-'use client'
-
 import { cx, merely, MerelyComponentProps } from '@/style-system'
-import { useColorMode, useGlobalContext } from '@/theme'
-import { FC, PropsWithChildren } from 'react'
-import styles from './Card.module.css'
+import { useGlobalContext } from '@/theme'
+import { CardRecipe } from './Card.recipe'
 
 export type CardSize = 's' | 'm' | 'l'
 
@@ -11,24 +8,13 @@ export interface CardProps extends MerelyComponentProps<'div'> {
 	_size?: CardSize
 }
 
-export const Card: FC<PropsWithChildren<CardProps>> = ({
-	children,
-	_size = 'm',
-	className,
-	theme,
-	...otherProps
-}) => {
+export const Card = (props: CardProps) => {
+	const { children, _size = 'm', className, theme, ...otherProps } = props
 	const { card } = useGlobalContext()
-	const { colorMode: cssTheme } = useColorMode(theme)
 
 	return (
 		<merely.div
-			className={cx(
-				styles.card,
-				styles['size_' + _size],
-				styles[cssTheme],
-				className
-			)}
+			className={cx(CardRecipe.base, CardRecipe.sizes[_size], className)}
 			overlapCSS={card}
 			{...otherProps}
 		>

@@ -1,11 +1,8 @@
-'use client'
-
 import { injectGlobal } from '@emotion/css'
-import { FC, PropsWithChildren, useEffect, useState } from 'react'
+import { ReactNode } from 'react'
 import { ColorModeProvider, MerelyColorMode } from '../color-mode-provider'
+import { generateGlobalStyles } from '../globals/generate-global-styles'
 import { MerelyGlobalContext, MerelyThemeConfig } from './merely-global-context'
-import { InterFontUrl, merelyGlobalStyles } from './merely-global-styles'
-import { resetStyles } from './reset-styles'
 
 export interface MerelyProviderProps {
 	/** @param {boolean} disableGlobalStyles  If `true`, Merely Global Styles will be disabled :) */
@@ -18,37 +15,25 @@ export interface MerelyProviderProps {
 	defaultColorMode?: MerelyColorMode
 	/** @param {boolean} enableSystemColorMode If `true`, Color Mode will be determined from `prefers-color-scheme` media query */
 	enableSystemColorMode?: boolean
-	/** @param {boolean} disableUrlFontImport If `true`, `Inter` font will not be loaded from Google Fonts via `@import` at CSS */
-	disableUrlFontImport?: boolean
+	/** @param {string} cssPrefix Pass string which will be replace prefix of CSS colors variables
+	 * @default `--merely`
+	 */
+	cssPrefix?: string
+	children: ReactNode
 }
 
-export const MerelyProvider: FC<PropsWithChildren<MerelyProviderProps>> = ({
-	children,
-	disableGlobalStyles,
-	CSSReset,
-	defaultColorMode = 'dark',
-	enableSystemColorMode = false,
-	disableUrlFontImport,
-	themeConfig = {}
-}) => {
-	if (!disableUrlFontImport) injectGlobal(InterFontUrl)
-	if (!disableGlobalStyles) injectGlobal(merelyGlobalStyles)
-	if (CSSReset) injectGlobal(resetStyles)
+export const MerelyProvider = (props: MerelyProviderProps) => {
+	const {
+		children,
+		disableGlobalStyles,
+		CSSReset = false,
+		defaultColorMode = 'dark',
+		enableSystemColorMode = false,
+		themeConfig = {},
+		cssPrefix = '--merely'
+	} = props
 
-	const [stylesReady, setStylesReady] = useState(false)
-
-	useEffect(() => {
-		const loadStyles = async () => {
-			await new Promise(resolve => setTimeout(resolve, 500))
-			setStylesReady(true)
-		}
-
-		loadStyles()
-	}, [])
-
-	if (!stylesReady) {
-		return null
-	}
+	injectGlobal(generateGlobalStyles(cssPrefix, disableGlobalStyles, CSSReset))
 
 	return (
 		<MerelyGlobalContext.Provider value={themeConfig}>

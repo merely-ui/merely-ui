@@ -1,45 +1,38 @@
-'use client'
-
-import { cx, getChild, merely, MerelyComponentProps } from '@/style-system'
-import { useColorMode } from '@/theme'
-import { ElementType, PropsWithChildren } from 'react'
-import styles from './Popover.module.css'
+import { cx, merely, MerelyComponentProps } from '@/style-system'
+import { ElementType } from 'react'
+import { Portal } from '../Portal'
 import { usePopoverContext } from './popover-context'
+import { PopoverRecipe } from './Popover.recipe'
 
-export const PopoverContent = <C extends ElementType = 'div'>({
-	children,
-	theme,
-	className,
-	...otherProps
-}: PropsWithChildren<MerelyComponentProps<C>>) => {
-	const { colorMode: cssTheme } = useColorMode(theme)
-	const { direction, isUnmounting } = usePopoverContext()
+export const PopoverContent = <C extends ElementType = 'div'>(
+	props: MerelyComponentProps<C>
+) => {
+	const { children, theme, className, ...otherProps } = props
 
-	const closeButton = getChild(children, '@merely-ui/popover-close-button')
-	const header = getChild(children, '@merely-ui/popover-header')
-	const footer = getChild(children, '@merely-ui/popover-footer')
-	const body = getChild(children, '@merely-ui/popover-body')
+	const { direction, isOpen, x, y, positioningRef, id } = usePopoverContext()
 
 	return (
-		<merely.div
-			className={cx(
-				styles.content,
-				styles[cssTheme],
-				styles[direction],
-				{
-					[styles['unmount_' + direction]]: isUnmounting
-				},
-				className
-			)}
-			{...otherProps}
-		>
-			<div className={styles.headerTop}>
-				{header}
-				{closeButton}
-			</div>
-			{body}
-			{footer}
-		</merely.div>
+		<Portal>
+			<merely.div
+				_ref={positioningRef}
+				className={cx(
+					PopoverRecipe.content,
+					{
+						[PopoverRecipe.open]: isOpen,
+						[PopoverRecipe.hidden]: !isOpen,
+						[PopoverRecipe[direction]]: !isOpen
+					},
+					className
+				)}
+				left={x}
+				top={y}
+				aria-hidden={!isOpen}
+				id={id}
+				{...otherProps}
+			>
+				{children}
+			</merely.div>
+		</Portal>
 	)
 }
 

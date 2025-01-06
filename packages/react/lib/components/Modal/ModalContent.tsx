@@ -1,45 +1,31 @@
-'use client'
-
-import { cx, getChild, merely, MerelyComponentProps } from '@/style-system'
-import { useColorMode } from '@/theme'
-import { ElementType, PropsWithChildren } from 'react'
-import styles from './Modal.module.css'
+import { cx, merely, MerelyComponentProps } from '@/style-system'
+import { ElementType } from 'react'
 import { useModalContext } from './modal-context'
+import { ModalRecipe } from './Modal.recipe'
 
-export const ModalContent = <C extends ElementType = 'div'>({
-	children,
-	theme,
-	className,
-	...otherProps
-}: PropsWithChildren<MerelyComponentProps<C>>) => {
-	const { colorMode: cssTheme } = useColorMode(theme)
-	const { isUnmounting } = useModalContext()
+export const ModalContent = <C extends ElementType = 'div'>(
+	props: MerelyComponentProps<C>
+) => {
+	const { children, theme, className, ...otherProps } = props
 
-	const closeButton = getChild(children, '@merely-ui/modal-close-button')
-	const header = getChild(children, '@merely-ui/modal-header')
-	const footer = getChild(children, '@merely-ui/modal-footer')
-	const body = getChild(children, '@merely-ui/modal-body')
+	const { isUnmounting, _size, isCentered } = useModalContext()
 
 	return (
 		<merely.div
 			role='dialog'
 			aria-modal
 			className={cx(
-				styles.content,
-				styles[cssTheme],
+				ModalRecipe.content,
+				ModalRecipe.sizes[_size].content,
 				{
-					[styles.unmountContent]: isUnmounting
+					[ModalRecipe.unmountContent]: isUnmounting,
+					[ModalRecipe.centered]: isCentered
 				},
 				className
 			)}
 			{...otherProps}
 		>
-			<div className={styles.top}>
-				{header}
-				{closeButton}
-			</div>
-			{body}
-			{footer}
+			{children}
 		</merely.div>
 	)
 }

@@ -1,4 +1,5 @@
 import { createContext, Dispatch, SetStateAction, useContext } from 'react'
+import { SelectSize } from './Select'
 
 type SelectContextType = {
 	value: string
@@ -8,6 +9,7 @@ type SelectContextType = {
 	isExpanded: boolean
 	setIsExpanded: Dispatch<SetStateAction<boolean>>
 	keyboardFocus: boolean
+	size: SelectSize
 }
 
 export const SelectContext = createContext<SelectContextType>({
@@ -17,7 +19,8 @@ export const SelectContext = createContext<SelectContextType>({
 	value: '',
 	displayValue: '',
 	setDisplayValue: value => {},
-	keyboardFocus: false
+	keyboardFocus: false,
+	size: 'm'
 })
 
 export const useSelect = () => useContext(SelectContext)

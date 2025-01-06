@@ -1,16 +1,14 @@
-'use client'
-
 import {
 	cx,
 	merely,
 	MerelyComponentProps,
 	useDelayUnmount
 } from '@/style-system'
-import { useColorMode, useGlobalContext } from '@/theme'
-import { FC, PropsWithChildren, useEffect } from 'react'
-import { createPortal } from 'react-dom'
-import styles from './Modal.module.css'
+import { useGlobalContext } from '@/theme'
+import { useEffect } from 'react'
+import { Portal } from '../Portal'
 import { ModalContext } from './modal-context'
+import { ModalRecipe } from './Modal.recipe'
 
 export type ModalSize = 's' | 'm' | 'l'
 
@@ -22,19 +20,20 @@ export interface ModalProps extends MerelyComponentProps<'div'> {
 	isCentered?: boolean
 }
 
-export const Modal: FC<PropsWithChildren<ModalProps>> = ({
-	children,
-	_size = 'm',
-	className,
-	theme,
-	isOpen,
-	onClose,
-	lockScrollOnMount = true,
-	isCentered,
-	...otherProps
-}) => {
+export const Modal = (props: ModalProps) => {
+	const {
+		children,
+		_size = 'm',
+		className,
+		theme,
+		isOpen,
+		onClose,
+		lockScrollOnMount = true,
+		isCentered = false,
+		...otherProps
+	} = props
+
 	const { modal } = useGlobalContext()
-	const { colorMode: cssTheme } = useColorMode(theme)
 	const { isUnmounting, shouldRender } = useDelayUnmount(isOpen, 140)
 
 	useEffect(() => {
@@ -50,19 +49,18 @@ export const Modal: FC<PropsWithChildren<ModalProps>> = ({
 			value={{
 				isOpen,
 				onClose,
-				isUnmounting
+				isUnmounting,
+				_size,
+				isCentered
 			}}
 		>
-			{shouldRender &&
-				createPortal(
+			{shouldRender && (
+				<Portal>
 					<merely.div
 						className={cx(
-							styles.modal,
-							styles['size_' + _size],
-							styles[cssTheme],
+							ModalRecipe.base,
 							{
-								[styles.unmountModal]: isUnmounting,
-								[styles.centered]: isCentered
+								[ModalRecipe.unmountModal]: isUnmounting
 							},
 							className
 						)}
@@ -70,9 +68,9 @@ export const Modal: FC<PropsWithChildren<ModalProps>> = ({
 						{...otherProps}
 					>
 						{children}
-					</merely.div>,
-					document.body
-				)}
+					</merely.div>
+				</Portal>
+			)}
 		</ModalContext.Provider>
 	)
 }

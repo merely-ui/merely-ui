@@ -1,37 +1,34 @@
-'use client'
-
-import { merely, MerelyComponentProps } from '@/style-system'
+import { cx, merely, MerelyComponentProps } from '@/style-system'
+import { focusItself } from '@/utilities/focus'
 import {
 	ElementType,
 	KeyboardEvent,
-	PropsWithChildren,
 	useCallback,
 	useEffect,
 	useMemo,
 	useRef
 } from 'react'
-import { focusItself } from './focus'
 import { useSelect } from './select-context'
-import styles from './Select.module.css'
+import { SelectRecipe } from './Select.recipe'
 
 export type SelectItemProps<C extends ElementType = 'li'> = {
 	value?: string
 	selected?: boolean
 } & MerelyComponentProps<C>
 
-export const SelectItem = <C extends ElementType = 'li'>({
-	children,
-	value,
-	selected,
-	...props
-}: PropsWithChildren<SelectItemProps<C>>) => {
+export const SelectItem = <C extends ElementType = 'li'>(
+	props: SelectItemProps<C>
+) => {
+	const { children, value, selected, ...otherProps } = props
+
 	const liRef = useRef<HTMLLIElement>(null)
 
 	const {
 		setValue,
 		setIsExpanded,
 		value: selectedValue,
-		setDisplayValue
+		setDisplayValue,
+		size
 	} = useSelect()
 
 	const isSelected = useMemo(() => {
@@ -48,8 +45,6 @@ export const SelectItem = <C extends ElementType = 'li'>({
 			if (!value) setValue(children)
 		}
 		if (value) setValue(value)
-
-		// close on select
 		setIsExpanded(false)
 	}, [children, setDisplayValue, setIsExpanded, setValue, value])
 
@@ -80,14 +75,14 @@ export const SelectItem = <C extends ElementType = 'li'>({
 	return (
 		<merely.li
 			_ref={liRef}
-			className={styles.option}
+			className={cx(SelectRecipe.option, SelectRecipe.sizes[size].option)}
 			role='option'
 			aria-selected={isSelected}
 			tabIndex={0}
 			onKeyDown={onEnterKeyDown}
-			onClick={select}
 			onPointerEnter={onPointerEnter}
-			{...props}
+			onClick={select}
+			{...otherProps}
 		>
 			{children}
 		</merely.li>

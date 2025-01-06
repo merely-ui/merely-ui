@@ -1,9 +1,7 @@
-'use client'
-
 import { cx, merely, MerelyComponentProps } from '@/style-system'
-import { useColorMode, useGlobalContext } from '@/theme'
-import { ElementType, PropsWithChildren } from 'react'
-import styles from './Tag.module.css'
+import { useGlobalContext } from '@/theme'
+import { ElementType } from 'react'
+import { TagRecipe } from './Tag.recipe'
 
 export type TagVariant = 'solid' | 'outline'
 export type TagSize = 's' | 'm' | 'l'
@@ -11,26 +9,26 @@ export type TagSize = 's' | 'm' | 'l'
 export type TagProps<C extends ElementType = 'span'> = {
 	variant?: TagVariant
 	_size?: TagSize
-} & PropsWithChildren<MerelyComponentProps<C>>
+} & MerelyComponentProps<C>
 
-export const Tag = <C extends ElementType = 'span'>({
-	children,
-	theme,
-	className,
-	variant = 'solid',
-	_size = 'm',
-	...otherProps
-}: TagProps<C>) => {
+export const Tag = <C extends ElementType = 'span'>(props: TagProps<C>) => {
+	const {
+		children,
+		theme,
+		className,
+		variant = 'solid',
+		_size = 'm',
+		...otherProps
+	} = props
+
 	const { tag } = useGlobalContext()
-	const { colorMode: cssTheme } = useColorMode(theme)
 
 	return (
 		<merely.span
 			className={cx(
-				styles.tag,
-				styles['size_' + _size],
-				styles[variant],
-				styles[cssTheme],
+				TagRecipe.base,
+				TagRecipe.sizes[_size],
+				TagRecipe.variants[variant],
 				className
 			)}
 			overlapCSS={tag}

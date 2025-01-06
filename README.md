@@ -12,12 +12,11 @@
 
 ## Documentation
 
-Website for documentation is under development and will be ready soon ^_^
+Website for documentation is under development and will be ready soon ^\_^
 
 ## Features
 
 - Styling Props: Merely UI provides a set of styling props that make it easy to style your components directly in JSX.
-- Bundle-Friendly: Merely UI bundle size is really small and amounts to 3.3kb at minzipped variant.
 - Color Mode Switch: Merely UI has easy color mode switching out-of-the-box and all components are compatible with Light and Dark mode.
 - Accessible. Merely UI components follow the WAI-ARIA guidelines specifications.
 
@@ -61,10 +60,10 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 2. Use Merely UI components:
 
 ```jsx
-import { Button } from "@merely-ui/react"
+import { Button } from '@merely-ui/react'
 
 function App() {
-  return <Button>Click me!</Button>
+	return <Button>Click me!</Button>
 }
 ```
 

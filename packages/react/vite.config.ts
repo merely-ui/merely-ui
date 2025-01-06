@@ -4,11 +4,10 @@ import { extname, relative, resolve } from 'path'
 import { fileURLToPath } from 'url'
 import { defineConfig } from 'vite'
 import dtsPlugin from 'vite-plugin-dts'
-import { libInjectCss } from 'vite-plugin-lib-inject-css'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	plugins: [react(), libInjectCss(), dtsPlugin({ include: ['lib'] })],
+	plugins: [react(), dtsPlugin({ include: ['lib'] })],
 	resolve: {
 		extensions: ['.ts', '.tsx'],
 
@@ -18,14 +17,18 @@ export default defineConfig({
 	},
 
 	build: {
-		cssMinify: true,
-		minify: true,
 		lib: {
 			entry: resolve(__dirname, 'lib/index.ts'),
 			formats: ['es']
 		},
 		rollupOptions: {
-			external: ['react', 'react-dom', 'react/jsx-runtime', '@emotion/css'],
+			external: [
+				'react',
+				'react-dom',
+				'react/jsx-runtime',
+				'@emotion/css',
+				'next-themes'
+			],
 			input: Object.fromEntries(
 				glob
 					.sync('lib/**/*.{ts,tsx}')
@@ -35,7 +38,6 @@ export default defineConfig({
 					])
 			),
 			output: {
-				assetFileNames: 'assets/[name][extname]',
 				entryFileNames: '[name].js'
 			}
 		}

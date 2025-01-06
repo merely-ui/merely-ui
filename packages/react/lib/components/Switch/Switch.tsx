@@ -1,15 +1,7 @@
-'use client'
-
 import { cx, merely, MerelyComponentProps } from '@/style-system'
 import { useGlobalContext } from '@/theme'
-import {
-	CSSProperties,
-	ElementType,
-	MouseEvent,
-	PropsWithChildren,
-	useState
-} from 'react'
-import styles from './Switch.module.css'
+import { CSSProperties, ElementType, MouseEvent, useState } from 'react'
+import { SwitchRecipe } from './Switch.recipe'
 
 export type SwitchSize = 's' | 'm' | 'l'
 
@@ -18,18 +10,22 @@ export type SwitchProps<C extends ElementType = 'button'> = {
 	toggled?: boolean
 	onToggle?: () => void
 	activeBgColor?: CSSProperties['color']
-} & PropsWithChildren<MerelyComponentProps<C>>
+} & MerelyComponentProps<C>
 
-export const Switch = <C extends ElementType = 'button'>({
-	children,
-	className,
-	_size = 'm',
-	toggled = false,
-	onToggle,
-	activeBgColor,
-	'aria-label': ariaLabel,
-	...otherProps
-}: SwitchProps<C>) => {
+export const Switch = <C extends ElementType = 'button'>(
+	props: SwitchProps<C>
+) => {
+	const {
+		children,
+		className,
+		_size = 'm',
+		toggled = false,
+		onToggle,
+		activeBgColor,
+		'aria-label': ariaLabel,
+		...otherProps
+	} = props
+
 	const [isToggled, setIsToggled] = useState(toggled)
 	const { switch: switchCss } = useGlobalContext()
 
@@ -42,10 +38,10 @@ export const Switch = <C extends ElementType = 'button'>({
 	return (
 		<merely.button
 			className={cx(
-				styles.switch,
-				styles['size_' + _size],
+				SwitchRecipe.base,
+				SwitchRecipe.sizes[_size],
 				{
-					[styles.toggled]: isToggled
+					[SwitchRecipe.toggled]: isToggled
 				},
 				className
 			)}
@@ -59,8 +55,8 @@ export const Switch = <C extends ElementType = 'button'>({
 			{...otherProps}
 		>
 			<span
-				className={cx(styles.ball, {
-					[styles.ballToggled]: isToggled
+				className={cx(SwitchRecipe.ball, SwitchRecipe.ballSizes[_size], {
+					[SwitchRecipe.ballToggled]: isToggled
 				})}
 			/>
 		</merely.button>

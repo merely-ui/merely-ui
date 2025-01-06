@@ -1,9 +1,0 @@
-.code {
-	all: unset;
-	background-color: #404040;
-	padding: 4px;
-	border-radius: 5px;
-	align-self: flex-start;
-	display: flex;
-	place-items: center;
-}

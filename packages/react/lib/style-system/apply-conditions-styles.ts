@@ -1,15 +1,11 @@
-import { CSSObject } from '@emotion/css'
 import { expandStyles } from './expand-styles'
-import { ConditionsQueries } from './props-types'
+import { ConditionsQueries } from './props/conditions/conditions'
+import { StringObject } from './types'
 
-export const applyConditionsStyles = (
-	stylesPropsObj: Record<string, any> = {},
-	filteredStyleObj: CSSObject = {}
-) => {
-	ConditionsQueries.forEach(({ cssQuery, property }) => {
-		if (stylesPropsObj[property]) {
-			filteredStyleObj[cssQuery] = expandStyles(stylesPropsObj[property])
-			delete stylesPropsObj[property]
+export const applyConditionsStyles = (stylesProps: StringObject = {}) => {
+	ConditionsQueries.forEach(q => {
+		if (q.property in stylesProps) {
+			stylesProps[q.cssQuery] = expandStyles(stylesProps[q.property])
 		}
 	})
 }

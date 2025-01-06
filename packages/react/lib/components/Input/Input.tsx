@@ -1,35 +1,36 @@
-'use client'
-
-import { cx, merely, MerelyComponentProps } from '@/style-system'
-import { useColorMode, useGlobalContext } from '@/theme'
-import { FC } from 'react'
-import styles from './Input.module.css'
+import {
+	cx,
+	merely,
+	MerelyComponentProps,
+	MerelyStyleProps
+} from '@/style-system'
+import { useGlobalContext } from '@/theme'
+import { getFocusBorderColorVar, InputRecipe } from './Input.recipe'
 
 export type InputSize = 'xs' | 's' | 'm' | 'l' | 'xl'
-export type InputVariant = 'default' | 'outline'
 
 export interface InputProps extends MerelyComponentProps<'input'> {
 	_size?: InputSize
-	variant?: InputVariant
+	focusBorderColor?: MerelyStyleProps['color']
 }
 
-export const Input: FC<InputProps> = ({
-	_size = 'm',
-	variant = 'default',
-	className,
-	theme,
-	...otherProps
-}) => {
+export const Input = (props: InputProps) => {
+	const {
+		_size = 'm',
+		className,
+		theme,
+		focusBorderColor,
+		...otherProps
+	} = props
+
 	const { input } = useGlobalContext()
-	const { colorMode: cssTheme } = useColorMode(theme)
 
 	return (
 		<merely.input
 			className={cx(
-				styles.input,
-				styles['size_' + _size],
-				styles[variant],
-				styles[cssTheme],
+				getFocusBorderColorVar(focusBorderColor),
+				InputRecipe.base,
+				InputRecipe.sizes[_size],
 				className
 			)}
 			overlapCSS={input}

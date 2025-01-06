@@ -1,15 +1,7 @@
-'use client'
-
 import { useOutsideDisclosure } from '@/hooks'
-import {
-	cx,
-	getChild,
-	merely,
-	MerelyComponentProps,
-	useDelayUnmount
-} from '@/style-system'
-import { FC, PropsWithChildren } from 'react'
-import styles from './Popover.module.css'
+import { merely, MerelyComponentProps, useDelayUnmount } from '@/style-system'
+import { usePosition } from '@/utilities/pos'
+import { useId, useRef } from 'react'
 import { PopoverContext } from './popover-context'
 
 export type PopoverDirection = 'left' | 'right' | 'bottom' | 'top'
@@ -18,30 +10,34 @@ export interface PopoverProps extends MerelyComponentProps<'div'> {
 	_direction?: PopoverDirection
 }
 
-export const Popover: FC<PropsWithChildren<PopoverProps>> = ({
-	children,
-	className,
-	_direction = 'right',
-	...otherProps
-}) => {
-	const { setIsOpen, isOpen, ref } = useOutsideDisclosure()
-	const { shouldRender, isUnmounting } = useDelayUnmount(isOpen, 150)
+export const Popover = (props: PopoverProps) => {
+	const { children, className, _direction = 'right', ...otherProps } = props
 
-	const trigger = getChild(children, '@merely-ui/popover-trigger')
-	const content = getChild(children, '@merely-ui/popover-content')
+	const ref = useRef(null)
+	const {
+		setIsOpen,
+		isOpen,
+		ref: positioningRef
+	} = useOutsideDisclosure({
+		refs: [ref]
+	})
+	const { shouldRender } = useDelayUnmount(isOpen, 150)
+	const { x, y } = usePosition(ref, positioningRef, _direction)
 
 	return (
 		<PopoverContext.Provider
-			value={{ isOpen, setIsOpen, direction: _direction, isUnmounting }}
+			value={{
+				isOpen: shouldRender,
+				setIsOpen,
+				direction: _direction,
+				positioningRef,
+				x,
+				y,
+				id: useId()
+			}}
 		>
-			<merely.div
-				_ref={ref}
-				role='tooltip'
-				className={cx(styles.wrapper, className)}
-				{...otherProps}
-			>
-				{trigger}
-				{shouldRender && <>{content}</>}
+			<merely.div display='inline-block' _ref={ref} {...otherProps}>
+				{children}
 			</merely.div>
 		</PopoverContext.Provider>
 	)

@@ -1,20 +1,17 @@
-'use client'
-
 import { cx, merely, MerelyComponentProps } from '@/style-system'
 import { useGlobalContext } from '@/theme'
 import { ElementType } from 'react'
-import styles from './Grid.module.css'
+import { GridRecipe } from './Grid.recipe'
 
-export const Grid = <C extends ElementType = 'div'>({
-	children,
-	className,
-	...otherProps
-}: MerelyComponentProps<C>) => {
+export const Grid = <C extends ElementType = 'div'>(
+	props: MerelyComponentProps<C>
+) => {
+	const { children, className, ...otherProps } = props
 	const { grid } = useGlobalContext()
 
 	return (
 		<merely.div
-			className={cx(styles.grid, className)}
+			className={cx(GridRecipe, className)}
 			overlapCSS={grid}
 			{...otherProps}
 		>

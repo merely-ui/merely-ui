@@ -24,6 +24,6 @@
 			"@/*": ["lib/*"]
 		}
 	},
-	"include": ["src", "lib"],
+	"include": ["src", "lib", "../../drafts/cx.ts"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }

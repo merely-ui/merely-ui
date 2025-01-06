@@ -1,14 +1,20 @@
 import { cx, merely, MerelyComponentProps } from '@/style-system'
 import { ElementType } from 'react'
-import styles from './Modal.module.css'
+import { ModalRecipe } from './Modal.recipe'
+import { useModalContext } from './modal-context'
 
-export const ModalHeader = <C extends ElementType = 'div'>({
-	children,
-	className,
-	...otherProps
-}: MerelyComponentProps<C>) => {
+export const ModalHeader = <C extends ElementType = 'div'>(
+	props: MerelyComponentProps<C>
+) => {
+	const { children, className, ...otherProps } = props
+
+	const { _size } = useModalContext()
+
 	return (
-		<merely.div className={cx(styles.header, className)} {...otherProps}>
+		<merely.div
+			className={cx(ModalRecipe.sizes[_size].header, className)}
+			{...otherProps}
+		>
 			{children}
 		</merely.div>
 	)

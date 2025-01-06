@@ -1,35 +1,32 @@
-import { Code } from '@/components/Code'
+import { useRef } from 'react'
 import {
+	Avatar,
+	AvatarBadge,
+	Button,
+	Card,
+	Code,
+	colors,
+	Hint,
+	Input,
 	Modal,
 	ModalBody,
 	ModalCloseButton,
 	ModalContent,
 	ModalFooter,
 	ModalHeader,
-	ModalOverlay
-} from '@/components/Modal'
-import { PopoverBody } from '@/components/Popover/PopoverBody'
-import { PopoverCloseButton } from '@/components/Popover/PopoverCloseButton'
-import { PopoverFooter } from '@/components/Popover/PopoverFooter'
-import { PopoverHeader } from '@/components/Popover/PopoverHeader'
-import {
-	Avatar,
-	AvatarBadge,
-	Button,
-	Card,
-	Flex,
-	Hint,
-	HintText,
-	HintTrigger,
-	Input,
+	ModalOverlay,
 	Popover,
+	PopoverBody,
+	PopoverCloseButton,
 	PopoverContent,
+	PopoverFooter,
+	PopoverHeader,
 	PopoverTrigger,
 	Select,
 	SelectItem,
+	Stack,
 	Switch,
 	Tag,
-	Text,
 	Textarea,
 	useColorMode,
 	useDisclosure
@@ -37,67 +34,118 @@ import {
 import './App.css'
 
 function App() {
-	const { toggle, setColorMode } = useColorMode()
+	const ref = useRef(null)
+	const { toggle } = useColorMode()
 	const { isOpen, onClose, toggle: toggleDis } = useDisclosure()
 
 	return (
-		<div className='main'>
-			<p className='read-the-docs'>
-				Click on the Vite and React logos to learn more
-			</p>
-			<Button onClick={() => setColorMode('light')}>Set dark</Button>
-			<Button variant='outline' onClick={toggleDis}>
-				Open
-			</Button>
+		<Stack flexDir='column' alignItems='flex-start' p={50} gap={50}>
+			<Stack _ref={ref} alignItems='center'>
+				<Button _size='xs'>Button</Button>
+				<Button _size='s'>Button</Button>
+				<Button _size='m'>Button</Button>
+				<Button _size='l'>Button</Button>
+				<Button _size='xl'>Button</Button>
+			</Stack>
+			<Stack alignItems='center'>
+				<Card _size='s'>Card</Card>
+				<Card _size='m'>Card</Card>
+				<Card _size='l'>Card</Card>
+			</Stack>
 			<Button
 				onClick={toggle}
-				ml={'100px'}
-				mt={'100px'}
-				mx={100}
 				aria-label={'Text'}
 				_size='l'
 				w={100}
+				theme='light'
+				htmlColor='black'
+				_hover={{
+					bgColor: colors.purple.$200
+				}}
 			>
-				Enter
+				Toggle
 			</Button>
-			<Flex className='home'>
-				<Text>Sdsdsd</Text>
-				<Code color='white'>console.log('Hello world!')</Code>
-				<label htmlFor='switch'>Label</label>
-				<Switch id='switch' />
+			<Button variant='outline' onClick={toggleDis}>
+				Open modal
+			</Button>
+			<Stack alignItems='center'>
 				<Switch _size='s' />
+				<Switch _size='m' activeBgColor={colors.teal.$400} />
 				<Switch _size='l' />
-				<Card>Card</Card>
-				<Hint>
-					<HintTrigger>
-						<Button>Hint</Button>
-					</HintTrigger>
-					<HintText minW={400}>
-						Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis, rem
-						repellat! Corporis dicta vitae corrupti minima voluptatem alias sit
-						debitis, consectetur sapiente eos nihil consequatur id eius
-						accusamus temporibus nesciunt.
-					</HintText>
-				</Hint>
-				<Textarea placeholder='Textarea placeholder' />
-				<Avatar>
-					<AvatarBadge w={15} />
+			</Stack>
+			<Stack alignItems='center'>
+				<Select _size='s' onChangeValue={value => console.log(value)}>
+					<SelectItem>Mango</SelectItem>
+					<SelectItem>Apple</SelectItem>
+				</Select>
+				<Select _size='m' onChangeValue={value => console.log(value)}>
+					<SelectItem>Mango</SelectItem>
+					<SelectItem>Apple</SelectItem>
+				</Select>
+				<Select _size='l' onChangeValue={value => console.log(value)}>
+					<SelectItem>Mango</SelectItem>
+					<SelectItem>Apple</SelectItem>
+				</Select>
+			</Stack>
+			<Stack htmlColor='black' alignItems='center'>
+				<Textarea _size='s' />
+				<Textarea _size='m' />
+				<Textarea _size='l' />
+			</Stack>
+			<Stack alignItems='center'>
+				<Input _size='xs' />
+				<Input focusBorderColor='transparent' _size='s' />
+				<Input _size='m' />
+				<Input _size='l' />
+				<Input _size='xl' />
+			</Stack>
+			<Stack alignItems='center'>
+				<Code _size='s'>console.log('Hello world!')</Code>
+				<Code _size='m'>console.log('Hello world!')</Code>
+				<Code _size='m'>Hint</Code>
+				<Code _size='l'>console.log('Hello world!')</Code>
+			</Stack>
+			<Stack alignItems='center'>
+				<Tag _size='s'>Tag</Tag>
+				<Tag _size='m' variant='outline'>
+					Tag
+				</Tag>
+				<Tag _size='l'>Tag</Tag>
+			</Stack>
+			<Stack alignItems='center'>
+				<Avatar _size='s'>
+					<AvatarBadge />
 				</Avatar>
-			</Flex>
-			<Select
-				onChange={value => console.log(value)}
-				placeholder='SELECT'
-				buttonProps={{
-					maxH: 30
-				}}
-				listProps={{
-					bgColor: 'white'
-				}}
-			>
-				<SelectItem selected>Mango</SelectItem>
-			</Select>
-			<Tag>Sale</Tag>
-			<Modal isOpen={isOpen} onClose={onClose}>
+				<Avatar>
+					<AvatarBadge />
+				</Avatar>
+				<Avatar _size='l'>
+					<AvatarBadge />
+				</Avatar>
+			</Stack>
+
+			<Hint text='Hint text'>
+				<Button>Hint</Button>
+			</Hint>
+			<Stack w={'100%'} justifyContent='center'>
+				<Popover _direction='top'>
+					<PopoverTrigger asChild>
+						<Button>Popover</Button>
+					</PopoverTrigger>
+					<PopoverContent>
+						<PopoverCloseButton />
+						<PopoverHeader>Popover Header</PopoverHeader>
+						<PopoverBody>
+							<div>Lorem ipsum dolor sit amet adds dsds dss</div>
+						</PopoverBody>
+						<PopoverFooter>
+							<Button>Click</Button>
+						</PopoverFooter>
+					</PopoverContent>
+				</Popover>
+			</Stack>
+
+			<Modal _size='s' isOpen={isOpen} onClose={onClose} isCentered>
 				<ModalOverlay />
 				<ModalContent>
 					<ModalCloseButton />
@@ -108,23 +156,7 @@ function App() {
 					</ModalFooter>
 				</ModalContent>
 			</Modal>
-			<Popover>
-				<PopoverTrigger>
-					<Button>Click to Open</Button>
-				</PopoverTrigger>
-				<PopoverContent>
-					<PopoverCloseButton />
-					<PopoverHeader>Popover Header</PopoverHeader>
-					<PopoverBody>
-						<div>Lorem ipsum dolor sit amet</div>
-					</PopoverBody>
-					<PopoverFooter>
-						<Button>Click</Button>
-					</PopoverFooter>
-				</PopoverContent>
-			</Popover>
-			<Input placeholder='Some text' />
-		</div>
+		</Stack>
 	)
 }
 

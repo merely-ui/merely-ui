@@ -1,11 +1,8 @@
-'use client'
-
 import { cx, merely, MerelyComponentProps } from '@/style-system'
-import { FC } from 'react'
-import styles from './Avatar.module.css'
+import { AvatarRecipe } from './Avatar.recipe'
 
 export type AvatarBadgeSize = 'm' | 'l'
-export type AvatarBadgeVariant = 'online' | 'offline'
+export type AvatarBadgeVariant = 'online' | 'offline' | 'sleep'
 export type AvatarBadgePlacement =
 	| 'top-right'
 	| 'top-left'
@@ -18,20 +15,22 @@ export interface AvatarBadgeProps extends MerelyComponentProps<'img'> {
 	placement?: AvatarBadgePlacement
 }
 
-export const AvatarBadge: FC<AvatarBadgeProps> = ({
-	className,
-	_size,
-	variant = 'online',
-	placement = 'bottom-right',
-	...otherProps
-}) => {
+export const AvatarBadge = (props: AvatarBadgeProps) => {
+	const {
+		className,
+		_size = 'm',
+		variant = 'online',
+		placement = 'bottom-right',
+		...otherProps
+	} = props
+
 	return (
 		<merely.div
 			className={cx(
-				styles.avatarBadge,
-				styles[variant],
-				styles[placement],
-				styles['size_' + _size],
+				AvatarRecipe.badge,
+				AvatarRecipe.variants[variant],
+				AvatarRecipe.placement[placement],
+				AvatarRecipe.sizes[_size],
 				className
 			)}
 			{...otherProps}
