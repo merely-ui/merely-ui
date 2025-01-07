@@ -235,7 +235,7 @@ export const ConditionsQueries: ConditionItem[] = [
 	},
 	{
 		property: '_fullscreen',
-		cssQuery: '&is(:fullscreen, [data-fullscreen])'
+		cssQuery: '&:is(:fullscreen, [data-fullscreen])'
 	},
 	{
 		property: '_motionReduce',
@@ -259,11 +259,11 @@ export const ConditionsQueries: ConditionItem[] = [
 	},
 	{
 		property: '_dark',
-		cssQuery: '&.dark, .dark &'
+		cssQuery: '&[data-theme="dark"], [data-theme="dark"] &'
 	},
 	{
 		property: '_light',
-		cssQuery: '&.light, .light &'
+		cssQuery: '&[data-theme="light"], [data-theme="light"] &'
 	},
 	{
 		property: '_mediaDark',
@@ -306,43 +306,43 @@ export const ConditionsQueries: ConditionItem[] = [
 		cssQuery: '@media (prefers-color-scheme: light)'
 	},
 	{
-		property: 'sm',
+		property: '_sm',
 		cssQuery: '@media screen (min-width: 40rem)'
 	},
 	{
-		property: 'smDown',
+		property: '_smDown',
 		cssQuery: '@media screen and (max-width: 39.9952rem)'
 	},
 	{
-		property: 'md',
+		property: '_md',
 		cssQuery: '@media screen and (min-width: 48rem)'
 	},
 	{
-		property: 'mdDown',
+		property: '_mdDown',
 		cssQuery: '@media screen and (max-width: 47.9952rem)'
 	},
 	{
-		property: 'lg',
+		property: '_lg',
 		cssQuery: '@media screen and (min-width: 64rem)'
 	},
 	{
-		property: 'lgDown',
+		property: '_lgDown',
 		cssQuery: '@media screen and (max-width: 63.9952rem)'
 	},
 	{
-		property: 'xl',
+		property: '_xl',
 		cssQuery: '@media screen and (min-width: 80rem)'
 	},
 	{
-		property: 'xlDown',
+		property: '_xlDown',
 		cssQuery: '@media screen and (max-width: 79.9952rem)'
 	},
 	{
-		property: '2xl',
+		property: '_2xl',
 		cssQuery: '@media screen and (min-width: 96rem)'
 	},
 	{
-		property: '2xlDown',
+		property: '_2xlDown',
 		cssQuery: '@media screen and (max-width: 95.9952rem)'
 	},
 	{

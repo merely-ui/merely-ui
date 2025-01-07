@@ -1,6 +1,6 @@
 import { injectGlobal } from '@emotion/css'
-import { ReactNode } from 'react'
-import { ColorModeProvider, MerelyColorMode } from '../color-mode-provider'
+import { ThemeProvider } from 'next-themes'
+import { MerelyColorMode } from '../color-mode'
 import { generateGlobalStyles } from '../globals/generate-global-styles'
 import { MerelyGlobalContext, MerelyThemeConfig } from './merely-global-context'
 
@@ -11,15 +11,26 @@ export interface MerelyProviderProps {
 	CSSReset?: boolean
 	/** @param {MerelyThemeConfig} themeConfig Pass object to redefine components styles */
 	themeConfig?: MerelyThemeConfig
-	/** @param {MerelyColorMode} defaultColorMode Pass Color Mode which will be enabled by default */
-	defaultColorMode?: MerelyColorMode
-	/** @param {boolean} enableSystemColorMode If `true`, Color Mode will be determined from `prefers-color-scheme` media query */
-	enableSystemColorMode?: boolean
 	/** @param {string} cssPrefix Pass string which will be replace prefix of CSS colors variables
 	 * @default `--merely`
 	 */
 	cssPrefix?: string
-	children: ReactNode
+	/** @param {MerelyColorMode} defaultColorMode Pass Color Mode which will be enabled by default */
+	defaultColorMode?: MerelyColorMode
+	/** @param {boolean} enableSystemColorMode If `true`, Color Mode will be determined from `prefers-color-scheme` media query */
+	enableSystemColorMode?: boolean
+	/** @param {Array} themes Array of themes (next-themes)
+	 * @default ['light', 'dark']
+	 */
+	themes?: string[]
+	/** @param {boolean} disableTransitionOnChange Optionally disable all CSS transitions when switching themes (next-themes)
+	 * @default true
+	 */
+	disableTransitionOnChange?: boolean
+	/** @param {string} forcedTheme Forced theme name for the current page (does not modify saved theme settings) (next-themes)
+	 */
+	forcedTheme?: string | MerelyColorMode
+	children: React.ReactNode
 }
 
 export const MerelyProvider = (props: MerelyProviderProps) => {
@@ -27,9 +38,12 @@ export const MerelyProvider = (props: MerelyProviderProps) => {
 		children,
 		disableGlobalStyles,
 		CSSReset = false,
-		defaultColorMode = 'dark',
+		defaultColorMode,
 		enableSystemColorMode = false,
 		themeConfig = {},
+		themes = ['light', 'dark'],
+		disableTransitionOnChange,
+		forcedTheme,
 		cssPrefix = '--merely'
 	} = props
 
@@ -37,12 +51,15 @@ export const MerelyProvider = (props: MerelyProviderProps) => {
 
 	return (
 		<MerelyGlobalContext.Provider value={themeConfig}>
-			<ColorModeProvider
-				enableSystemColorMode={enableSystemColorMode}
-				defaultColorMode={defaultColorMode}
+			<ThemeProvider
+				defaultTheme={defaultColorMode}
+				themes={themes}
+				enableSystem={enableSystemColorMode}
+				disableTransitionOnChange={disableTransitionOnChange}
+				forcedTheme={forcedTheme}
 			>
 				{children}
-			</ColorModeProvider>
+			</ThemeProvider>
 		</MerelyGlobalContext.Provider>
 	)
 }

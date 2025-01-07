@@ -1,4 +1,4 @@
-import { MerelyColorMode } from '@/theme/color-mode-provider'
+import { MerelyColorMode } from '@/theme/color-mode'
 import {
 	ComponentProps,
 	ComponentPropsWithoutRef,

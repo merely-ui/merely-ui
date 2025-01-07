@@ -27,6 +27,7 @@ import {
 	Stack,
 	Switch,
 	Tag,
+	Text,
 	Textarea,
 	useColorMode,
 	useDisclosure
@@ -40,9 +41,25 @@ function App() {
 
 	return (
 		<Stack flexDir='column' alignItems='flex-start' p={50} gap={50}>
+			<Text fontWeight={500}>Text</Text>
 			<Stack _ref={ref} alignItems='center'>
 				<Button _size='xs'>Button</Button>
-				<Button _size='s'>Button</Button>
+				<Button
+					_dark={{
+						bgColor: 'yellow',
+						_hover: {
+							bgColor: 'red'
+						}
+					}}
+					_light={{
+						_hover: {
+							bgColor: 'magenta'
+						}
+					}}
+					_size='s'
+				>
+					Button
+				</Button>
 				<Button _size='m'>Button</Button>
 				<Button _size='l'>Button</Button>
 				<Button _size='xl'>Button</Button>
@@ -94,7 +111,7 @@ function App() {
 			</Stack>
 			<Stack alignItems='center'>
 				<Input _size='xs' />
-				<Input focusBorderColor='transparent' _size='s' />
+				<Input focusBorderColor='rebeccapurple' _size='s' />
 				<Input _size='m' />
 				<Input _size='l' />
 				<Input _size='xl' />

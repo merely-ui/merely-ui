@@ -3,7 +3,8 @@ export const HTMLProps: string[] = [
 	'width',
 	'height',
 	'fontSize',
-	'display'
+	'display',
+	'fontWeight'
 ]
 
 export const MerelyHTMLProps: string[] = HTMLProps.map(

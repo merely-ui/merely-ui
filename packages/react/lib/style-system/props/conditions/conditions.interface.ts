@@ -63,8 +63,8 @@ export interface Conditions {
 	_print: StyleProps
 	_landscape: StyleProps
 	_portrait: StyleProps
-	_dark: StyleProps
-	_light: StyleProps
+	_dark: Partial<StyleProps & Conditions>
+	_light: Partial<StyleProps & Conditions>
 	_mediaDark: StyleProps
 	_mediaLight: StyleProps
 	_highContrast: StyleProps
@@ -73,18 +73,18 @@ export interface Conditions {
 	_scrollbar: StyleProps
 	_scrollbarThumb: StyleProps
 	_scrollbarTrack: StyleProps
-	_sysDark: StyleProps
-	_sysLight: StyleProps
-	sm: StyleProps
-	smDown: StyleProps
-	md: StyleProps
-	mdDown: StyleProps
-	lg: StyleProps
-	lgDown: StyleProps
-	xl: StyleProps
-	xlDown: StyleProps
-	'2xl': StyleProps
-	'2xlDown': StyleProps
+	_sysDark: Partial<StyleProps & Conditions>
+	_sysLight: Partial<StyleProps & Conditions>
+	_sm: StyleProps
+	_smDown: StyleProps
+	_md: StyleProps
+	_mdDown: StyleProps
+	_lg: StyleProps
+	_lgDown: StyleProps
+	_xl: StyleProps
+	_xlDown: StyleProps
+	_2xl: StyleProps
+	_2xlDown: StyleProps
 	_svg: StyleProps
 	css: string
 }
