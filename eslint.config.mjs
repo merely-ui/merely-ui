@@ -1,5 +1,6 @@
 import { fixupPluginRules } from '@eslint/compat'
 import eslint from '@eslint/js'
+import eslintNext from '@next/eslint-plugin-next'
 import typescriptEslint from '@typescript-eslint/eslint-plugin'
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import eslintPluginReact from 'eslint-plugin-react'
@@ -11,6 +12,7 @@ export default tseslint.config(
 	eslint.configs.recommended,
 	...tseslint.configs.recommended,
 	eslintPluginPrettierRecommended,
+	eslintNext,
 	{ files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
 	{
 		plugins: {
