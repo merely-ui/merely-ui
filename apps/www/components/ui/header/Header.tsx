@@ -1,11 +1,13 @@
+import { root } from '@/lib/root'
 import { Box, colors, Flex, Text } from '@merely-ui/react'
 import Link from 'next/link'
 import Container from '../Container'
-import LogoLink from '../LogoLink'
-import SearchBar from './SearchBar'
-import ToggleTheme from './ToggleTheme'
+import LogoLink from '../logo/LogoLink'
+import DocsTabs from './docs-tabs/docs-tabs'
+import SearchBar from './search-bar/SearchBar'
+import ToggleTheme from './toggle-theme/ToggleTheme'
 
-export default function Header() {
+function HeaderBox({ children }: { children: React.ReactNode }) {
 	return (
 		<Box
 			position='fixed'
@@ -21,51 +23,77 @@ export default function Header() {
 				bgColor: 'rgba(255, 255, 255, 0.2)'
 			}}
 		>
-			<Container>
-				<Flex
-					as='header'
-					justifyContent='space-between'
-					gap={24}
-					alignItems='center'
-					py={14}
-				>
-					<Flex alignItems='center' gap={60}>
-						<Box display='flex' alignItems='start' maxH={36}>
-							<LogoLink />
-						</Box>
-						<Flex gap={24} alignItems='center'>
-							<Link href={'/docs/get-started'}>
-								<Text
-									fontWeight={500}
-									transition='all .1s ease'
-									_hover={{
-										textDecoration: 'underline',
-										color: colors.gray.$100
-									}}
-								>
-									Docs
-								</Text>
-							</Link>
-							<Link href={'/playground'}>
-								<Text
-									fontWeight={500}
-									_hover={{
-										textDecoration: 'underline',
-										color: colors.gray.$100
-									}}
-								>
-									Playground
-								</Text>
-							</Link>
-						</Flex>
-					</Flex>
-					<Flex alignItems='center' gap={36}>
-						<SearchBar />
-
-						<ToggleTheme />
-					</Flex>
-				</Flex>
-			</Container>
+			<Container>{children}</Container>
 		</Box>
+	)
+}
+
+function HeaderSubBox({ children }: { children: React.ReactNode }) {
+	return (
+		<Flex
+			as='header'
+			justifyContent='space-between'
+			gap={24}
+			alignItems='center'
+			py={14}
+		>
+			{children}
+		</Flex>
+	)
+}
+
+function HeaderNav() {
+	return (
+		<Flex alignItems='center' gap={60}>
+			<Box display='flex' alignItems='start' maxH={36}>
+				<LogoLink />
+			</Box>
+			<Flex gap={24} alignItems='center'>
+				<Link href={root.getInstallationLink()}>
+					<Text
+						fontWeight={500}
+						transition='all .1s ease'
+						_hover={{
+							textDecoration: 'underline',
+							color: colors.gray.$100
+						}}
+					>
+						Docs
+					</Text>
+				</Link>
+				<Link href={root.getPlaygroundLink()}>
+					<Text
+						fontWeight={500}
+						_hover={{
+							textDecoration: 'underline',
+							color: colors.gray.$100
+						}}
+					>
+						Playground
+					</Text>
+				</Link>
+			</Flex>
+		</Flex>
+	)
+}
+
+function HeaderRightSide() {
+	return (
+		<Flex alignItems='center' gap={36}>
+			<SearchBar />
+			<ToggleTheme />
+		</Flex>
+	)
+}
+
+export default function Header() {
+	return (
+		<HeaderBox>
+			<HeaderSubBox>
+				<HeaderNav />
+				<HeaderRightSide />
+			</HeaderSubBox>
+			<DocsTabs />
+		</HeaderBox>
 	)
 }
