@@ -2,9 +2,8 @@
 
 import { cache, MerelyProvider } from '@merely-ui/react'
 import { useServerInsertedHTML } from 'next/navigation'
-import { ReactNode } from 'react'
 
-export const Providers = ({ children }: { children: ReactNode }) => {
+export const Providers = ({ children }: { children: React.ReactNode }) => {
 	useServerInsertedHTML(() => (
 		<style
 			data-emotion={`${cache.key} ${Object.keys(cache.inserted).join(' ')}`}
@@ -13,6 +12,6 @@ export const Providers = ({ children }: { children: ReactNode }) => {
 			}}
 		/>
 	))
-	/** @ts-expect-error zalupa */
-	return <MerelyProvider>{children}</MerelyProvider>
+
+	return <MerelyProvider defaultColorMode='light'>{children}</MerelyProvider>
 }

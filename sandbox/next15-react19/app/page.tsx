@@ -43,7 +43,16 @@ export default function Home() {
 		<Stack flexDir='column' alignItems='flex-start' p={50} gap={50}>
 			<Stack _ref={ref} alignItems='center'>
 				<Button _size='xs'>Button</Button>
-				<Button _size='s'>Button</Button>
+				<Button
+					_size='s'
+					_dark={{
+						_hover: {
+							bgColor: 'red'
+						}
+					}}
+				>
+					Button
+				</Button>
 				<Button _size='m'>Button</Button>
 				<Button _size='l'>Button</Button>
 				<Button _size='xl'>Button</Button>

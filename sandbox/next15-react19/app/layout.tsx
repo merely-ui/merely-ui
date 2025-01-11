@@ -28,7 +28,6 @@ export default function RootLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
-				{/** @ts-expect-error zalupa */}
 				<Providers>{children}</Providers>
 			</body>
 		</html>
