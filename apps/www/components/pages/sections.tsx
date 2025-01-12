@@ -66,7 +66,14 @@ function WelcomeSectionReleaseLink() {
 function WelcomeSectionTitle() {
 	return (
 		<Flex flexDir='column'>
-			<Title as={'h1'} fontSize='3.5rem' fontWeight={700}>
+			<Title
+				as={'h1'}
+				fontSize='2.5rem'
+				fontWeight={700}
+				_lg={{
+					fontSize: '3.5rem'
+				}}
+			>
 				Build beautiful UI with ease
 			</Title>
 			<Text _size='xl' maxW={'50rem'} fontWeight={500} color={colors.gray.$200}>
@@ -126,9 +133,15 @@ function CodeSectionBox({ children }: { children: React.ReactNode }) {
 	return (
 		<Grid
 			as='section'
-			gridTemplateColumns={'repeat(4, 1fr)'}
+			gridTemplateColumns={'1fr'}
 			py={'6rem'}
 			mb={'8rem'}
+			_md={{
+				gridTemplateColumns: 'repeat(2, 1fr)'
+			}}
+			_xl={{
+				gridTemplateColumns: 'repeat(4, 1fr)'
+			}}
 		>
 			{children}
 		</Grid>
@@ -193,9 +206,13 @@ function AdvantagesSectionBox({ children }: { children: React.ReactNode }) {
 function AdvantagesSectionGrid({ children }: { children: React.ReactNode }) {
 	return (
 		<Grid
-			gridTemplateColumns='repeat(2, 500px)'
-			gap={40}
+			gridTemplateColumns='1fr'
+			gap={12}
 			justifyContent='center'
+			_md={{
+				gridTemplateColumns: 'repeat(2, minmax(0, 500px))',
+				gap: 40
+			}}
 		>
 			{children}
 		</Grid>

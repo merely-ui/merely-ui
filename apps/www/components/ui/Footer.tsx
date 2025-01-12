@@ -20,7 +20,12 @@ function FooterBox({ children }: { children: React.ReactNode }) {
 			}}
 		>
 			<Container>
-				<Flex flexDir='row' justifyContent='space-between'>
+				<Flex
+					flexDir='row'
+					justifyContent='space-between'
+					gap={40}
+					flexWrap='wrap-reverse'
+				>
 					{children}
 				</Flex>
 			</Container>
@@ -53,7 +58,21 @@ function FooterLeftSide() {
 }
 
 function FooterGridBox({ children }: { children: React.ReactNode }) {
-	return <Grid gridTemplateColumns='repeat(2, 200px)'>{children}</Grid>
+	return (
+		<Grid
+			gridTemplateColumns='200px'
+			gap={32}
+			_sm={{
+				gap: 16
+			}}
+			_md={{
+				gridTemplateColumns: 'repeat(2, 200px)',
+				gap: 0
+			}}
+		>
+			{children}
+		</Grid>
+	)
 }
 
 function FooterGridBoxItem({ children }: { children: React.ReactNode }) {

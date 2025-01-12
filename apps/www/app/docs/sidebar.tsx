@@ -12,6 +12,23 @@ import { useEffect, useState } from 'react'
 import { SidebarAnchor, SidebarBox } from './sidebar.server'
 
 export default function Sidebar() {
+	const { items, pathname } = useSidebarItems()
+
+	return (
+		<SidebarBox>
+			{items?.map(c => (
+				<SidebarAnchor
+					category={c.category}
+					items={c.items}
+					pathname={pathname}
+					key={c.category}
+				/>
+			))}
+		</SidebarBox>
+	)
+}
+
+export function useSidebarItems() {
 	const [items, setItems] = useState<SidebarLinks[]>([])
 
 	const pathname = usePathname()
@@ -28,16 +45,5 @@ export default function Sidebar() {
 		if (isThemingActive) setItems(themingLinks)
 	}, [pathname])
 
-	return (
-		<SidebarBox>
-			{items?.map(c => (
-				<SidebarAnchor
-					category={c.category}
-					items={c.items}
-					pathname={pathname}
-					key={c.category}
-				/>
-			))}
-		</SidebarBox>
-	)
+	return { items, pathname }
 }

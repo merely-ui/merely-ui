@@ -4,7 +4,15 @@ import { Title } from './page-contents'
 
 export function PageContentsBox({ children }: { children: React.ReactNode }) {
 	return (
-		<Flex flexDir='column' alignItems='flex-start' py={24} px={8}>
+		<Flex
+			flexDir='column'
+			alignItems='flex-start'
+			py={24}
+			px={8}
+			_xlDown={{
+				display: 'none'
+			}}
+		>
 			<Flex flexDir='column' pos='sticky' top={112 + 24} gap={8}>
 				{children}
 			</Flex>

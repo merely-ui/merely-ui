@@ -21,9 +21,12 @@ p {
 
 .code > pre {
 	display: block;
+	overflow-x: auto;
+	scroll-behavior: smooth;
 	padding: 1.5rem;
 	border-radius: 0.25rem;
 	font-size: 13.5px;
 	font-weight: 500;
 	line-height: 1.5;
+	max-width: calc(100vw - 48px);
 }

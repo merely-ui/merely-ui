@@ -5,7 +5,15 @@ export default function DocTitle({
 	...props
 }: { children: React.ReactNode } & TitleProps<'h1'>) {
 	return (
-		<Title as='h1' fontSize={36} fontWeight={700} {...props}>
+		<Title
+			as='h1'
+			fontSize={30}
+			_md={{
+				fontSize: 36
+			}}
+			fontWeight={700}
+			{...props}
+		>
 			{children}
 		</Title>
 	)

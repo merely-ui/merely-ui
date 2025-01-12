@@ -41,7 +41,13 @@ export default function Installation() {
 			<DocText mb={24}>
 				Below are guides for installing MerelyUI for various frameworks
 			</DocText>
-			<Grid gridTemplateColumns='repeat(2, minmax(0, 15rem))' mb={52}>
+			<Grid
+				gridTemplateColumns='1fr'
+				mb={52}
+				_md={{
+					gridTemplateColumns: 'repeat(2, minmax(0, 15rem))'
+				}}
+			>
 				<Link href={root.getNextAppLink()}>
 					<Card
 						p={'1.5rem'}
@@ -101,7 +107,7 @@ export default function Installation() {
 			<DocSubTitle id='provider' mt={52}>
 				Add Provider
 			</DocSubTitle>
-			<Flex alignItems='center' mb={24} gap={4}>
+			<Flex alignItems='center' flexWrap='wrap' mb={24} gap={4}>
 				<DocText>
 					After installing Merely UI, you need to wrap root of your application
 					in

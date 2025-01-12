@@ -5,7 +5,15 @@ export default function DocText({
 	...props
 }: { children: React.ReactNode } & TextProps<'p'>) {
 	return (
-		<Text color={colors.gray.$200} {...props}>
+		<Text
+			_dark={{
+				color: colors.gray.$200
+			}}
+			_light={{
+				color: colors.gray.$500
+			}}
+			{...props}
+		>
 			{children}
 		</Text>
 	)

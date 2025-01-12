@@ -7,7 +7,7 @@ import DocsTabLink from './docs-tab-link'
 
 function DocsTabsBox({ children }: { children: React.ReactNode }) {
 	return (
-		<Flex alignItems='center' gap={4} pb={'1rem'}>
+		<Flex alignItems='center' gap={4}>
 			{children}
 		</Flex>
 	)

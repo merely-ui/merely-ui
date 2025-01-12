@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Container from '../Container'
 import LogoLink from '../logo/LogoLink'
 import DocsTabs from './docs-tabs/docs-tabs'
+import { HeaderMobileNav, MobileSidebar } from './Header.client'
 import SearchBar from './search-bar/SearchBar'
 import ToggleTheme from './toggle-theme/ToggleTheme'
 
@@ -48,7 +49,14 @@ function HeaderNav() {
 			<Box display='flex' alignItems='start' maxH={36}>
 				<LogoLink />
 			</Box>
-			<Flex gap={24} alignItems='center'>
+			<Flex
+				gap={24}
+				alignItems='center'
+				display='none'
+				_md={{
+					display: 'flex'
+				}}
+			>
 				<Link href={root.getInstallationLink()}>
 					<Text
 						fontWeight={500}
@@ -64,6 +72,7 @@ function HeaderNav() {
 				<Link href={root.getPlaygroundLink()}>
 					<Text
 						fontWeight={500}
+						transition='all .1s ease'
 						_hover={{
 							textDecoration: 'underline',
 							color: colors.gray.$100
@@ -79,9 +88,16 @@ function HeaderNav() {
 
 function HeaderRightSide() {
 	return (
-		<Flex alignItems='center' gap={36}>
+		<Flex
+			alignItems='center'
+			gap={8}
+			_md={{
+				gap: 36
+			}}
+		>
 			<SearchBar />
 			<ToggleTheme />
+			<HeaderMobileNav />
 		</Flex>
 	)
 }
@@ -94,6 +110,7 @@ export default function Header() {
 				<HeaderRightSide />
 			</HeaderSubBox>
 			<DocsTabs />
+			<MobileSidebar />
 		</HeaderBox>
 	)
 }

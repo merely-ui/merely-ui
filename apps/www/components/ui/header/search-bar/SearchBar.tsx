@@ -14,6 +14,7 @@ import {
 	Text,
 	useDisclosure
 } from '@merely-ui/react'
+import { Search } from 'lucide-react'
 import { redirect } from 'next/navigation'
 import { ChangeEvent, useState } from 'react'
 import { useHotkeys } from 'react-hotkeys-hook'
@@ -33,10 +34,13 @@ function SearchBarButton({ toggle }: { toggle: () => void }) {
 			padding='0.375rem 0.75rem'
 			borderRadius='0.375rem'
 			border='1px solid var(--input-border-color)'
-			display='flex'
+			display='none'
 			alignItems='center'
 			gap={80}
 			onClick={toggle}
+			_md={{
+				display: 'flex'
+			}}
 		>
 			<Text color={colors.gray.$400} _size='s'>
 				Search…
@@ -49,6 +53,22 @@ function SearchBarButton({ toggle }: { toggle: () => void }) {
 					K
 				</Code>
 			</Flex>
+		</Button>
+	)
+}
+
+function SearchBarMobileButton({ toggle }: { toggle: () => void }) {
+	return (
+		<Button
+			p={8}
+			variant='clear'
+			aria-label='Click to search the docs'
+			onClick={toggle}
+			_md={{
+				display: 'none'
+			}}
+		>
+			<Search width={16} height={16} />
 		</Button>
 	)
 }
@@ -111,11 +131,15 @@ export default function SearchBar() {
 	return (
 		<>
 			<SearchBarButton toggle={toggle} />
+			<SearchBarMobileButton toggle={toggle} />
 
 			<Modal isOpen={isOpen} onClose={onClose}>
 				<ModalOverlay />
 				<ModalContent
-					onKeyDown={() => console.log('sdsds')}
+					minW='16rem'
+					_md={{
+						minW: '22rem'
+					}}
 					p={0}
 					bgColor={'transparent'}
 				>
@@ -123,7 +147,6 @@ export default function SearchBar() {
 						autoFocus
 						_size='l'
 						placeholder='Search…'
-						w={'22rem'}
 						value={searchTerm}
 						onChange={onChange}
 						borderRadius={'0.25rem'}

@@ -9,7 +9,20 @@ export default function DocPage({ slug }: { slug: string[] }) {
 
 	return (
 		<>
-			<Flex flexDir='column' px={60} py={40}>
+			<Flex
+				flexDir='column'
+				px={12}
+				py={40}
+				_sm={{
+					px: 20
+				}}
+				_md={{
+					px: 40
+				}}
+				_lg={{
+					px: 60
+				}}
+			>
 				{page.content}
 			</Flex>
 			<PageContents sidebarTitles={page.sidebarTitles} />
