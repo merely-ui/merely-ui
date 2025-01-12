@@ -1,24 +1,9 @@
-import { Box, Flex } from '@merely-ui/react'
+import { Flex } from '@merely-ui/react'
+import { docs } from '../docs'
 import PageContents from './page-contents'
 
-const docs: Record<string, any> = {
-	'get-started': {
-		sidebarTitles: [
-			{
-				text: 'Installation',
-				idAttr: 'getting-started'
-			},
-			{
-				text: 'Frameworks guides',
-				idAttr: 'frameworks-guides'
-			}
-		],
-		content: <Box h={1520}>home</Box>
-	}
-}
-
 export default function DocPage({ slug }: { slug: string[] }) {
-	const page = docs[slug[0]]
+	const page = useDocPage(docs, slug)
 
 	if (!page?.content || !page?.sidebarTitles) return null
 
@@ -30,4 +15,21 @@ export default function DocPage({ slug }: { slug: string[] }) {
 			<PageContents sidebarTitles={page.sidebarTitles} />
 		</>
 	)
+}
+
+function useDocPage(
+	obj: Record<string, any>,
+	keys: string[]
+): Record<string, any> | null {
+	let current: any = obj
+
+	for (const key of keys) {
+		if (current && typeof current === 'object' && key in current) {
+			current = current[key]
+		} else {
+			return null
+		}
+	}
+
+	return current && typeof current === 'object' ? current : null
 }

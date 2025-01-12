@@ -10,5 +10,11 @@ export const root = {
 	getInstallationLink: () => '/docs/get-started/installation',
 	getComponentsLink: () => '/docs/components/overview',
 	getStylingLink: () => '/docs/styling/style-props',
-	getThemingLink: () => '/docs/theming/theme-editing'
+	getThemingLink: () => '/docs/theming/theme-editing',
+
+	getNextAppLink: () => '/docs/get-started/frameworks/next-app',
+	getNextPagesLink: () => '/docs/get-started/frameworks/next-pages',
+	getViteLink: () => '/docs/get-started/frameworks/vite',
+
+	getColorModeLink: () => '/docs/styling/color-mode'
 }

@@ -13,11 +13,6 @@ const geistSans = Geist({
 	subsets: ['latin']
 })
 
-// const geistMono = Geist_Mono({
-// 	variable: '--font-geist-mono',
-// 	subsets: ['latin']
-// })
-
 export const metadata: Metadata = {
 	title:
 		'Merely UI - Accessible & Lightweight Components Library for React apps',
