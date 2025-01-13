@@ -16,5 +16,7 @@ export const root = {
 	getNextPagesLink: () => '/docs/get-started/frameworks/next-pages',
 	getViteLink: () => '/docs/get-started/frameworks/vite',
 
-	getColorModeLink: () => '/docs/styling/color-mode'
+	getColorModeLink: () => '/docs/styling/color-mode',
+
+	getComponentDocLink: (slug: string) => `/docs/components/${slug}`
 }

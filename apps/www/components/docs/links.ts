@@ -143,16 +143,16 @@ export const componentsLinks: SidebarLinks[] = [
 				link: '/docs/components/switch'
 			}
 		]
-	},
-	{
-		category: 'Utilities',
-		items: [
-			{
-				text: 'Portal',
-				link: '/docs/components/portal'
-			}
-		]
 	}
+	// {
+	// 	category: 'Utilities',
+	// 	items: [
+	// 		{
+	// 			text: 'Portal',
+	// 			link: '/docs/components/portal'
+	// 		}
+	// 	]
+	// }
 ]
 
 export const stylingLinks: SidebarLinks[] = [

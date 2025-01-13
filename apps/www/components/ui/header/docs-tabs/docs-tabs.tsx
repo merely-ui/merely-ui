@@ -37,12 +37,12 @@ export default function DocsTabs() {
 			>
 				Components
 			</DocsTabLink>
-			<DocsTabLink isActive={isStylingActive} href={root.getStylingLink()}>
+			{/* <DocsTabLink isActive={isStylingActive} href={root.getStylingLink()}>
 				Styling
 			</DocsTabLink>
 			<DocsTabLink isActive={isThemingActive} href={root.getThemingLink()}>
 				Theming
-			</DocsTabLink>
+			</DocsTabLink> */}
 		</DocsTabsBox>
 	)
 }

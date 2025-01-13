@@ -8,6 +8,7 @@ export default function DocTitle({
 		<Title
 			as='h1'
 			fontSize={30}
+			mb={12}
 			_md={{
 				fontSize: 36
 			}}
