@@ -19,6 +19,7 @@
 	"devDependencies": {
 		"@types/react": "^19",
 		"@types/react-dom": "^19",
-		"shiki": "^1.26.1"
+		"shiki": "^1.26.1",
+		"typescript": "^5.7.3"
 	}
 }
