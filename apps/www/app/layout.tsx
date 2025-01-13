@@ -1,10 +1,10 @@
-import Footer from '@/components/ui/Footer'
-import Header from '@/components/ui/header/Header'
 import { Box } from '@merely-ui/react'
 import type { Metadata } from 'next'
 import { Geist } from 'next/font/google'
 import Providers from '../components/Providers'
 import Container from '../components/ui/Container'
+import Footer from '../components/ui/Footer'
+import Header from '../components/ui/header/Header'
 import './globals.css'
 
 const geistSans = Geist({
