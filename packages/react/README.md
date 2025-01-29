@@ -12,7 +12,7 @@
 
 ## Documentation
 
-Website for documentation is under development and will be ready soon ^\_^
+Website: https://merely-ui.com
 
 ## Features
 

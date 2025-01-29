@@ -1,8 +1,9 @@
 {
 	"name": "@merely-ui/react",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"license": "MIT",
 	"author": "Ivan Blinov <blinovdevelop@gmail.com>",
+	"homepage": "https://merely-ui.com",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/merely-ui/merely-ui",

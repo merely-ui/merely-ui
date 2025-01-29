@@ -1,6 +1,6 @@
+import { SidebarLinks } from '@/components/docs/links'
+import SidebarLink from '@/components/ui/shared/SidebarLink'
 import { Box, Flex, Text } from '@merely-ui/react'
-import { SidebarLinks } from '../../components/docs/links'
-import SidebarLink from '../../components/ui/shared/SidebarLink'
 
 export function SidebarBox({ children }: { children: React.ReactNode }) {
 	return (

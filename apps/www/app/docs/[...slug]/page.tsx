@@ -1,4 +1,4 @@
-import DocPage from '../../../components/docs/page/doc-page'
+import DocPage from '@/components/docs/page/doc-page'
 
 export default async function Page({
 	params
