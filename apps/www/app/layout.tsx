@@ -3,6 +3,8 @@ import Container from '@/components/ui/Container'
 import Footer from '@/components/ui/Footer'
 import Header from '@/components/ui/header/Header'
 import { Box } from '@merely-ui/react'
+import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
 import { Geist } from 'next/font/google'
 import './globals.css'
@@ -44,6 +46,8 @@ export default function RootLayout({
 					</Box>
 					<Footer />
 				</Providers>
+				<Analytics />
+				<SpeedInsights />
 			</body>
 		</html>
 	)
